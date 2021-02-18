@@ -210,17 +210,17 @@ public class TelaInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoEspacoActionPerformed
 
     private void btn_consultaAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultaAlunosActionPerformed
-        TabelaAlunos tAlunos = new TabelaAlunos();
+        ViewTabelaAlunos tAlunos = new ViewTabelaAlunos();
         tAlunos.setVisible(true);
     }//GEN-LAST:event_btn_consultaAlunosActionPerformed
 
     private void btn_consultaSalasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultaSalasActionPerformed
-        TabelaSalas tSalas = new TabelaSalas();
+        ViewTabelaSalas tSalas = new ViewTabelaSalas();
         tSalas.setVisible(true);
     }//GEN-LAST:event_btn_consultaSalasActionPerformed
 
     private void btn_consultaEspacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_consultaEspacoActionPerformed
-        TabelaEspacoCafe tEspaco = new TabelaEspacoCafe();
+        ViewTabelaEspacoCafe tEspaco = new ViewTabelaEspacoCafe();
         tEspaco.setVisible(true);
     }//GEN-LAST:event_btn_consultaEspacoActionPerformed
 
