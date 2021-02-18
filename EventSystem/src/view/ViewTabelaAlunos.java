@@ -101,6 +101,8 @@ public class ViewTabelaAlunos extends javax.swing.JFrame {
             }
         });
 
+        txtId.setEditable(false);
+
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tbl_alunos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idaluno}"), txtId, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
@@ -198,10 +200,10 @@ public class ViewTabelaAlunos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        AlunosRep aAlunos = new AlunosRep();
+        AlunosRep dAlunos = new AlunosRep();
         
-        aAlunos.setIdAluno(Integer.parseInt(txtId.getText()));
-        aAlunos.excluir(aAlunos);
+        dAlunos.setIdAluno(Integer.parseInt(txtId.getText()));
+        dAlunos.excluir(dAlunos);
         
     }//GEN-LAST:event_btnDeletarActionPerformed
 
