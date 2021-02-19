@@ -5,14 +5,14 @@
     <class>model.AlunosEntity</class>
     <class>model.EspacoCafeEntity</class>
     <class>model.SalasEntity</class>
-    <class>repository.Salas</class>
-    <class>repository.Espaco</class>
-    <class>repository.Alunos</class>
+    <class>view.Alunos</class>
+    <class>view.Espaco</class>
+    <class>view.Salas</class>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mysql?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mydb?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="123456"/>
+      <property name="javax.persistence.jdbc.password" value=""/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
     </properties>
   </persistence-unit>

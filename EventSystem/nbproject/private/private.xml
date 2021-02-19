@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/victo/OneDrive/Documentos/NetBeansProjects/EventSystem/src/view/TabelaAlunos.java</file>
-            <file>file:/C:/Users/victo/OneDrive/Documentos/NetBeansProjects/EventSystem/src/repository/AlunosRep.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Documentos/GitHub/CrudJavaJpa/EventSystem/src/view/ViewTabelaEspacoCafe.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Documentos/GitHub/CrudJavaJpa/EventSystem/src/model/EspacoCafeEntity.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Documentos/GitHub/CrudJavaJpa/EventSystem/src/view/ViewTabelaAlunos.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Documentos/GitHub/CrudJavaJpa/EventSystem/src/view/TelaInicio.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Documentos/GitHub/CrudJavaJpa/EventSystem/src/model/SalasEntity.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Documentos/GitHub/CrudJavaJpa/EventSystem/src/model/AlunosEntity.java</file>
+            <file>file:/C:/Users/victo/OneDrive/Documentos/GitHub/CrudJavaJpa/EventSystem/src/view/ViewTabelaSalas.java</file>
         </group>
     </open-files>
 </project-private>

@@ -6,11 +6,18 @@
 package model;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
+
 
 import javax.persistence.Table;
 
@@ -29,8 +36,30 @@ public class AlunosEntity implements Serializable{
     private String nomeAluno;
     @Column(length = 25)
     private String sobrenome;
+           
+    @ManyToOne
+    @JoinColumn(name = "idSala")
+    private SalasEntity salas;
 
-    
+    @ManyToOne
+    @JoinColumn(name = "idEspaco")
+    private EspacoCafeEntity espaco;
+
+    public EspacoCafeEntity getEspaco() {
+        return espaco;
+    }
+
+    public void setEspaco(EspacoCafeEntity espaco) {
+        this.espaco = espaco;
+    }
+   
+    public SalasEntity getSalas() {
+        return salas;
+    }
+
+    public void setSalas(SalasEntity salas) {
+        this.salas = salas;
+    }
     
     
     public Integer getIdAluno() {

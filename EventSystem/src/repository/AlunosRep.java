@@ -37,7 +37,7 @@ public class AlunosRep extends AlunosEntity{
             pstm = connection.prepareStatement(INSERT);
             
             pstm.setString(1, alunos.getNomeAluno());
-            pstm.setString(2, alunos.getSobrenome());                      
+            pstm.setString(2, alunos.getSobrenome());
             pstm.execute();
             pstm.close();
         
@@ -72,6 +72,8 @@ public class AlunosRep extends AlunosEntity{
             pstm = connection.prepareStatement(DELETE);
             pstm.setInt(1, alunos.getIdAluno());
             pstm.executeUpdate();
+            
+            System.out.println("Concluido!");
         } catch (SQLException ex) {
             System.out.println("Ocorreu um erro ao tentar salvar: " + ex.getMessage());
         }

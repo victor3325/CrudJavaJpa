@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import repository.EspacoCafeRep;
 
 /**
@@ -31,6 +32,8 @@ public class ViewTabelaEspacoCafe extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         EventSystemPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("EventSystemPU").createEntityManager();
+        espacoQuery = java.beans.Beans.isDesignTime() ? null : EventSystemPUEntityManager.createQuery("SELECT e FROM Espaco e");
+        espacoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : espacoQuery.getResultList();
         espacoQuery1 = java.beans.Beans.isDesignTime() ? null : EventSystemPUEntityManager.createQuery("SELECT e FROM Espaco e");
         espacoList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : espacoQuery1.getResultList();
         jPanel1 = new javax.swing.JPanel();
@@ -55,9 +58,8 @@ public class ViewTabelaEspacoCafe extends javax.swing.JFrame {
         columnBinding.setColumnName("Id");
         columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeespaco}"));
-        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnName("Espaco");
         columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lotacao}"));
         columnBinding.setColumnName("Lotacao");
         columnBinding.setColumnClass(Integer.class);
@@ -190,12 +192,19 @@ public class ViewTabelaEspacoCafe extends javax.swing.JFrame {
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         EspacoCafeRep aEspaco = new EspacoCafeRep();
+     
+        if(txtId.getText().equals("") || txtNome.getText().equals("") || txtLotacao.getText().equals("")){
+            JOptionPane.showMessageDialog(this," Preencha todos os campos! " );
+        }
+        else{
+            aEspaco.setNomeEspaco(txtNome.getText());
+            aEspaco.setLotacao(Integer.parseInt(txtLotacao.getText()));
+            aEspaco.setIdEspaco(Integer.parseInt(txtId.getText()));
         
-        aEspaco.setNomeEspaco(txtNome.getText());
-        aEspaco.setLotacao(Integer.parseInt(txtLotacao.getText()));
-        aEspaco.setIdEspaco(Integer.parseInt(txtId.getText()));
+            aEspaco.alterar(aEspaco);
+            JOptionPane.showMessageDialog(this," Alterado! " );
+        }
         
-        aEspaco.alterar(aEspaco);
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
@@ -204,6 +213,7 @@ public class ViewTabelaEspacoCafe extends javax.swing.JFrame {
         dEspaco.setIdEspaco(Integer.parseInt(txtId.getText()));
         
         dEspaco.excluir(dEspaco);
+        JOptionPane.showMessageDialog(this," Deletado! " );
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
@@ -246,7 +256,9 @@ public class ViewTabelaEspacoCafe extends javax.swing.JFrame {
     private javax.persistence.EntityManager EventSystemPUEntityManager;
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnDeletar;
-    private java.util.List<repository.Espaco> espacoList1;
+    private java.util.List<view.Espaco> espacoList;
+    private java.util.List<view.Espaco> espacoList1;
+    private javax.persistence.Query espacoQuery;
     private javax.persistence.Query espacoQuery1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -5,6 +5,7 @@
  */
 package view;
 
+import javax.swing.JOptionPane;
 import repository.SalasRep;
 
 /**
@@ -31,6 +32,8 @@ public class ViewTabelaSalas extends javax.swing.JFrame {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         EventSystemPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("EventSystemPU").createEntityManager();
+        salasQuery = java.beans.Beans.isDesignTime() ? null : EventSystemPUEntityManager.createQuery("SELECT s FROM Salas s");
+        salasList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : salasQuery.getResultList();
         salasQuery1 = java.beans.Beans.isDesignTime() ? null : EventSystemPUEntityManager.createQuery("SELECT s FROM Salas s");
         salasList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : salasQuery1.getResultList();
         jPanel1 = new javax.swing.JPanel();
@@ -52,11 +55,12 @@ public class ViewTabelaSalas extends javax.swing.JFrame {
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, salasList1, tbl_sala);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idsala}"));
-        columnBinding.setColumnName("Idsala");
+        columnBinding.setColumnName("Id");
         columnBinding.setColumnClass(Integer.class);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomesala}"));
-        columnBinding.setColumnName("Nomesala");
+        columnBinding.setColumnName("Sala");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lotacao}"));
         columnBinding.setColumnName("Lotacao");
         columnBinding.setColumnClass(Integer.class);
@@ -188,11 +192,17 @@ public class ViewTabelaSalas extends javax.swing.JFrame {
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         SalasRep aSalas = new SalasRep();
 
-        aSalas.setNomeSala(txtNome.getText());
-        aSalas.setLotacao(Integer.parseInt(txtLotacao.getText()));
-        aSalas.setIdSala(Integer.parseInt(txtId.getText()));
+        if (txtId.getText().equals("") || txtNome.getText().equals("") || txtLotacao.getText().equals("")) {
+            JOptionPane.showMessageDialog(this," Preencha todos os campos! " );
+        }else{
+            aSalas.setNomeSala(txtNome.getText());
+            aSalas.setLotacao(Integer.parseInt(txtLotacao.getText()));
+            aSalas.setIdSala(Integer.parseInt(txtId.getText()));
         
-        aSalas.alterar(aSalas);
+            aSalas.alterar(aSalas);
+            
+            JOptionPane.showMessageDialog(this," Alterado! " );
+        }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
@@ -201,6 +211,7 @@ public class ViewTabelaSalas extends javax.swing.JFrame {
         dSalas.setIdSala(Integer.getInteger(txtId.getText()));
         
         dSalas.excluir(dSalas);
+        JOptionPane.showMessageDialog(this," Deletado! " );
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**
@@ -248,7 +259,9 @@ public class ViewTabelaSalas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private java.util.List<repository.Salas> salasList1;
+    private java.util.List<view.Salas> salasList;
+    private java.util.List<view.Salas> salasList1;
+    private javax.persistence.Query salasQuery;
     private javax.persistence.Query salasQuery1;
     private javax.swing.JTable tbl_sala;
     private javax.swing.JTextField txtId;
