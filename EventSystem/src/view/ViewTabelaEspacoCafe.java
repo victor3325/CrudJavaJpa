@@ -36,6 +36,8 @@ public class ViewTabelaEspacoCafe extends javax.swing.JFrame {
         espacoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : espacoQuery.getResultList();
         espacoQuery1 = java.beans.Beans.isDesignTime() ? null : EventSystemPUEntityManager.createQuery("SELECT e FROM Espaco e");
         espacoList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : espacoQuery1.getResultList();
+        espacoQuery2 = java.beans.Beans.isDesignTime() ? null : EventSystemPUEntityManager.createQuery("SELECT e FROM Espaco e");
+        espacoList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : espacoQuery2.getResultList();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_espacoCafe = new javax.swing.JTable();
@@ -53,16 +55,19 @@ public class ViewTabelaEspacoCafe extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listar Espaços de Café", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, espacoList1, tbl_espacoCafe);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, espacoList2, tbl_espacoCafe);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idespaco}"));
         columnBinding.setColumnName("Id");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeespaco}"));
         columnBinding.setColumnName("Espaco");
         columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lotacao}"));
         columnBinding.setColumnName("Lotacao");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(tbl_espacoCafe);
@@ -256,10 +261,12 @@ public class ViewTabelaEspacoCafe extends javax.swing.JFrame {
     private javax.persistence.EntityManager EventSystemPUEntityManager;
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnDeletar;
-    private java.util.List<view.Espaco> espacoList;
-    private java.util.List<view.Espaco> espacoList1;
+    private java.util.List<repository.Espaco> espacoList;
+    private java.util.List<repository.Espaco> espacoList1;
+    private java.util.List<repository.Espaco> espacoList2;
     private javax.persistence.Query espacoQuery;
     private javax.persistence.Query espacoQuery1;
+    private javax.persistence.Query espacoQuery2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

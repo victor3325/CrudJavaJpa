@@ -106,4 +106,44 @@ public class SalasRep extends SalasEntity{
         }
         return salas;
     }
+    
+    public ArrayList<SalasEntity> listarPorID(int id) {
+        ArrayList<SalasEntity> lista = new ArrayList<>();
+        ResultSet res;
+        try {
+             pstm = connection.prepareStatement("SELECT * FROM salas where idSala LIKE '%"+id+"%'");
+             res = pstm.executeQuery();
+             while (res.next()) {
+                SalasEntity c = new  SalasEntity();
+                c.setIdSala(res.getInt("idSala"));
+                c.setNomeSala(res.getString("nomeSala"));
+                c.setLotacao(res.getInt("lotacao"));
+                lista.add(c);
+            }
+             
+        } catch (Exception ex) {
+            System.out.println("Ocorreu um erro ao tentar buscar os dados do banco: " + ex.getMessage());
+        }
+        return lista;
+    }
+    
+    public ArrayList<SalasEntity> listarPorNome(String nome) {
+        ArrayList<SalasEntity> lista = new ArrayList<>();
+        ResultSet res;
+        try {
+             pstm = connection.prepareStatement("SELECT * FROM salas where nomesala LIKE '%"+nome+"%'");
+             res = pstm.executeQuery();
+             while (res.next()) {
+                SalasEntity c = new  SalasEntity();
+                c.setIdSala(res.getInt("idSala"));
+                c.setNomeSala(res.getString("nomeSala"));
+                c.setLotacao(res.getInt("lotacao"));
+                lista.add(c);
+            }
+             
+        } catch (Exception ex) {
+            System.out.println("Ocorreu um erro ao tentar buscar os dados do banco: " + ex.getMessage());
+        }
+        return lista;
+    }
 }

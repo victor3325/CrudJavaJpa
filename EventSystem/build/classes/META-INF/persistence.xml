@@ -5,9 +5,15 @@
     <class>model.AlunosEntity</class>
     <class>model.EspacoCafeEntity</class>
     <class>model.SalasEntity</class>
-    <class>view.Alunos</class>
-    <class>view.Espaco</class>
-    <class>view.Salas</class>
+    <class>model.EtapaEntity</class>
+    <class>repository.Espaco</class>
+    <class>repository.Salas</class>
+    <class>repository.Alunos</class>
+    <class>repository.Etapa</class>
+    <class>repository.Alunoetapasala</class>
+    <class>repository.Alunoetapaespaco</class>
+    <class>model.AlunoEtapaEspacoEntity</class>
+    <class>model.AlunoEtapaSalaEntity</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mydb?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

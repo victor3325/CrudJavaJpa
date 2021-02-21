@@ -6,15 +6,12 @@
 package model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import javax.persistence.ManyToMany;
-
 import javax.persistence.Table;
 
 /**
@@ -33,7 +30,15 @@ public class EspacoCafeEntity implements Serializable{
     @Column(length = 3)
     private int lotacao;
 
+    public EspacoCafeEntity() {
+    }
 
+    public EspacoCafeEntity(Integer idEspaco, String nomeEspaco, int lotacao) {
+        this.idEspaco = idEspaco;
+        this.nomeEspaco = nomeEspaco;
+        this.lotacao = lotacao;
+    }
+    
     public Integer getIdEspaco() {
         return idEspaco;
     }
@@ -57,12 +62,43 @@ public class EspacoCafeEntity implements Serializable{
     public void setLotacao(int lotacao) {
         this.lotacao = lotacao;
     }
-    
-    
 
     @Override
     public String toString() {
         return "EspacoCafe: \n" + "idEspaco: " + idEspaco + "\nnomeEspaco: " + nomeEspaco;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.idEspaco);
+        hash = 47 * hash + Objects.hashCode(this.nomeEspaco);
+        hash = 47 * hash + this.lotacao;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final EspacoCafeEntity other = (EspacoCafeEntity) obj;
+        if (this.lotacao != other.lotacao) {
+            return false;
+        }
+        if (!Objects.equals(this.nomeEspaco, other.nomeEspaco)) {
+            return false;
+        }
+        if (!Objects.equals(this.idEspaco, other.idEspaco)) {
+            return false;
+        }
+        return true;
     }
     
     

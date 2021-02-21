@@ -46,9 +46,8 @@ public class TelaInicio extends javax.swing.JFrame {
         btn_consultaSalas = new javax.swing.JButton();
         btn_consultaEspaco = new javax.swing.JButton();
         jLabel_tituloPainel = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        btnConfirmar = new javax.swing.JButton();
+        btnOrganizar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -142,12 +141,17 @@ public class TelaInicio extends javax.swing.JFrame {
         jLabel_tituloPainel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel_tituloPainel.setName(""); // NOI18N
 
-        jLabel1.setText("Consulta por id Aluno");
-
-        btnConfirmar.setText("Confirmar");
-        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+        btnOrganizar.setText("Organizar evento");
+        btnOrganizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfirmarActionPerformed(evt);
+                btnOrganizarActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Pesquisar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -155,40 +159,38 @@ public class TelaInicio extends javax.swing.JFrame {
         jPanel_edicao.setLayout(jPanel_edicaoLayout);
         jPanel_edicaoLayout.setHorizontalGroup(
             jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_edicaoLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addComponent(jLabel_tituloPainel, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_edicaoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_consultaEspaco, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                    .addComponent(btn_consultaSalas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_consultaAlunos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(159, 159, 159)
+                .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNovoEspaco, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_edicaoLayout.createSequentialGroup()
-                        .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btn_consultaEspaco, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                            .addComponent(btn_consultaSalas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_consultaAlunos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(159, 159, 159)
-                        .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnNovoEspaco, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel_edicaoLayout.createSequentialGroup()
-                                .addComponent(btnNovaSala, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(314, 314, 314)
-                                .addComponent(jPanel_consultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnNovoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnNovaSala, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(314, 314, 314)
+                        .addComponent(jPanel_consultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnNovoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGroup(jPanel_edicaoLayout.createSequentialGroup()
+                .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_edicaoLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnConfirmar)
-                        .addGap(708, 708, 708))))
+                        .addGap(156, 156, 156)
+                        .addComponent(btnOrganizar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel_edicaoLayout.createSequentialGroup()
+                        .addGap(114, 114, 114)
+                        .addComponent(jLabel_tituloPainel, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel_edicaoLayout.setVerticalGroup(
             jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_edicaoLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel_tituloPainel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_consultaAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnNovoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -206,23 +208,25 @@ public class TelaInicio extends javax.swing.JFrame {
                             .addComponent(btnNovoEspaco, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btn_consultaEspaco, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnConfirmar)
-                    .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOrganizar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1)))
         );
 
         javax.swing.GroupLayout jpanel_telaPrincipalLayout = new javax.swing.GroupLayout(jpanel_telaPrincipal);
         jpanel_telaPrincipal.setLayout(jpanel_telaPrincipalLayout);
         jpanel_telaPrincipalLayout.setHorizontalGroup(
             jpanel_telaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_edicao, javax.swing.GroupLayout.PREFERRED_SIZE, 413, Short.MAX_VALUE)
+            .addGroup(jpanel_telaPrincipalLayout.createSequentialGroup()
+                .addComponent(jPanel_edicao, javax.swing.GroupLayout.PREFERRED_SIZE, 436, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jpanel_telaPrincipalLayout.setVerticalGroup(
             jpanel_telaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel_edicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanel_telaPrincipalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel_edicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         getContentPane().add(jpanel_telaPrincipal);
@@ -263,14 +267,15 @@ public class TelaInicio extends javax.swing.JFrame {
 
     
     
-    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        AlunosRep aConsultar = new AlunosRep();
-        
-        aConsultar.setIdAluno(Integer.parseInt(txtId.getText()));
-        
-        JOptionPane.showInputDialog(aConsultar.listar().toString());
-         
-    }//GEN-LAST:event_btnConfirmarActionPerformed
+    private void btnOrganizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrganizarActionPerformed
+        ViewEvento vEvento = new ViewEvento();
+        vEvento.setVisible(true);
+    }//GEN-LAST:event_btnOrganizarActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        ViewPesquisa pesquisa = new ViewPesquisa();
+        pesquisa.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -310,20 +315,19 @@ public class TelaInicio extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager EventSystemPUEntityManager;
-    private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnNovaSala;
     private javax.swing.JButton btnNovoAluno;
     private javax.swing.JButton btnNovoEspaco;
+    private javax.swing.JButton btnOrganizar;
     private javax.swing.JButton btn_consultaAlunos;
     private javax.swing.JButton btn_consultaEspaco;
     private javax.swing.JButton btn_consultaSalas;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel_tituloPainel;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel_consultar;
     private javax.swing.JPanel jPanel_edicao;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel jpanel_telaPrincipal;
-    private javax.swing.JTextField txtId;
     // End of variables declaration//GEN-END:variables
 }

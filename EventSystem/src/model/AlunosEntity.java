@@ -6,18 +6,13 @@
 package model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-
-
 
 import javax.persistence.Table;
 
@@ -35,33 +30,18 @@ public class AlunosEntity implements Serializable{
     @Column(length = 20)
     private String nomeAluno;
     @Column(length = 25)
-    private String sobrenome;
-           
-    @ManyToOne
-    @JoinColumn(name = "idSala")
-    private SalasEntity salas;
+    private String sobrenome;  
 
-    @ManyToOne
-    @JoinColumn(name = "idEspaco")
-    private EspacoCafeEntity espaco;
-
-    public EspacoCafeEntity getEspaco() {
-        return espaco;
-    }
-
-    public void setEspaco(EspacoCafeEntity espaco) {
-        this.espaco = espaco;
-    }
-   
-    public SalasEntity getSalas() {
-        return salas;
-    }
-
-    public void setSalas(SalasEntity salas) {
-        this.salas = salas;
-    }
     
-    
+    public AlunosEntity() {
+    }
+
+    public AlunosEntity(Integer idAluno, String nomeAluno, String sobrenome) {
+        this.idAluno = idAluno;
+        this.nomeAluno = nomeAluno;
+        this.sobrenome = sobrenome;
+    }
+         
     public Integer getIdAluno() {
         return idAluno;
     }
@@ -90,8 +70,42 @@ public class AlunosEntity implements Serializable{
 
     @Override
     public String toString() {
-        return "alunos:\n" + "idAluno: " + idAluno + "\nnomeAluno: " + nomeAluno + "\nsobrenome:" + sobrenome;
+        return "\nalunos:\n" + "\nnomeAluno: " + nomeAluno + "\nsobrenome:" + sobrenome;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 47 * hash + Objects.hashCode(this.idAluno);
+        hash = 47 * hash + Objects.hashCode(this.nomeAluno);
+        hash = 47 * hash + Objects.hashCode(this.sobrenome);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final AlunosEntity other = (AlunosEntity) obj;
+        if (!Objects.equals(this.nomeAluno, other.nomeAluno)) {
+            return false;
+        }
+        if (!Objects.equals(this.sobrenome, other.sobrenome)) {
+            return false;
+        }
+        if (!Objects.equals(this.idAluno, other.idAluno)) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 }

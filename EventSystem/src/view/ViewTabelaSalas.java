@@ -36,6 +36,8 @@ public class ViewTabelaSalas extends javax.swing.JFrame {
         salasList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : salasQuery.getResultList();
         salasQuery1 = java.beans.Beans.isDesignTime() ? null : EventSystemPUEntityManager.createQuery("SELECT s FROM Salas s");
         salasList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : salasQuery1.getResultList();
+        salasQuery2 = java.beans.Beans.isDesignTime() ? null : EventSystemPUEntityManager.createQuery("SELECT s FROM Salas s");
+        salasList2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : salasQuery2.getResultList();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_sala = new javax.swing.JTable();
@@ -53,10 +55,11 @@ public class ViewTabelaSalas extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listar Salas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, salasList1, tbl_sala);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, salasList2, tbl_sala);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idsala}"));
         columnBinding.setColumnName("Id");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomesala}"));
         columnBinding.setColumnName("Sala");
         columnBinding.setColumnClass(String.class);
@@ -64,6 +67,7 @@ public class ViewTabelaSalas extends javax.swing.JFrame {
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lotacao}"));
         columnBinding.setColumnName("Lotacao");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(tbl_sala);
@@ -259,10 +263,12 @@ public class ViewTabelaSalas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private java.util.List<view.Salas> salasList;
-    private java.util.List<view.Salas> salasList1;
+    private java.util.List<repository.Salas> salasList;
+    private java.util.List<repository.Salas> salasList1;
+    private java.util.List<repository.Salas> salasList2;
     private javax.persistence.Query salasQuery;
     private javax.persistence.Query salasQuery1;
+    private javax.persistence.Query salasQuery2;
     private javax.swing.JTable tbl_sala;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtLotacao;

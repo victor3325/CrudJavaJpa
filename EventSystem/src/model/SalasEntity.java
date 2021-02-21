@@ -7,16 +7,13 @@ package model;
 
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-
-
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -39,7 +36,15 @@ public class SalasEntity implements Serializable{
     private String nomeSala;
     @Column (length = 3)
     private int lotacao;
-         
+    
+    public SalasEntity() {
+    }
+
+    public SalasEntity(Integer idSala, String nomeSala, int lotacao) {
+        this.idSala = idSala;
+        this.nomeSala = nomeSala;
+        this.lotacao = lotacao;
+    }
     
     public Integer getIdSala() {
         return idSala;
@@ -64,21 +69,44 @@ public class SalasEntity implements Serializable{
     public void setLotacao(int lotacao) {
         this.lotacao = lotacao;
     }
-
-    
-    
-    
-    
+     
     @Override
     public String toString() {
         return "salas: \n" + "idSala: " + idSala + "\nnomeSala: " + nomeSala + "\nLotação: "+ lotacao;
     }
 
-   
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.idSala);
+        hash = 37 * hash + Objects.hashCode(this.nomeSala);
+        hash = 37 * hash + this.lotacao;
+        return hash;
+    }
 
-    
-
-    
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SalasEntity other = (SalasEntity) obj;
+        if (this.lotacao != other.lotacao) {
+            return false;
+        }
+        if (!Objects.equals(this.nomeSala, other.nomeSala)) {
+            return false;
+        }
+        if (!Objects.equals(this.idSala, other.idSala)) {
+            return false;
+        }
+        return true;
+    }   
     
     
 }

@@ -38,8 +38,6 @@ public class ViewTabelaAlunos extends javax.swing.JFrame {
         EventSystemPUEntityManager = java.beans.Beans.isDesignTime() ? null : javax.persistence.Persistence.createEntityManagerFactory("EventSystemPU").createEntityManager();
         alunosQuery = java.beans.Beans.isDesignTime() ? null : EventSystemPUEntityManager.createQuery("SELECT a FROM Alunos a");
         alunosList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : alunosQuery.getResultList();
-        alunosQuery1 = java.beans.Beans.isDesignTime() ? null : EventSystemPUEntityManager.createQuery("SELECT a FROM Alunos a");
-        alunosList1 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : alunosQuery1.getResultList();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_alunos = new javax.swing.JTable();
@@ -57,7 +55,7 @@ public class ViewTabelaAlunos extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listar Alunos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, alunosList1, tbl_alunos);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, alunosList, tbl_alunos);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idaluno}"));
         columnBinding.setColumnName("Id");
         columnBinding.setColumnClass(Integer.class);
@@ -70,14 +68,6 @@ public class ViewTabelaAlunos extends javax.swing.JFrame {
         columnBinding.setColumnName("Sobrenome");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idSala}"));
-        columnBinding.setColumnName("Id Sala");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idEspaco}"));
-        columnBinding.setColumnName("Id Espaco");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane1.setViewportView(tbl_alunos);
@@ -85,8 +75,6 @@ public class ViewTabelaAlunos extends javax.swing.JFrame {
             tbl_alunos.getColumnModel().getColumn(0).setResizable(false);
             tbl_alunos.getColumnModel().getColumn(1).setResizable(false);
             tbl_alunos.getColumnModel().getColumn(2).setResizable(false);
-            tbl_alunos.getColumnModel().getColumn(3).setResizable(false);
-            tbl_alunos.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jLabel1.setText("Nome");
@@ -270,10 +258,8 @@ public class ViewTabelaAlunos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager EventSystemPUEntityManager;
-    private java.util.List<view.Alunos> alunosList;
-    private java.util.List<view.Alunos> alunosList1;
+    private java.util.List<repository.Alunos> alunosList;
     private javax.persistence.Query alunosQuery;
-    private javax.persistence.Query alunosQuery1;
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnDeletar;
     private javax.swing.JLabel jLabel1;

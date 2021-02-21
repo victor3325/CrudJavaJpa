@@ -19,9 +19,9 @@ import util.ConexaoBD;
  * @author victo
  */
 public class AlunosRep extends AlunosEntity{
-    private static final String INSERT = "insert into alunos ( nomeAluno, sobrenome) values (?,?);";
+    private static final String INSERT = "insert into alunos (nomeAluno, sobrenome) values (?,?);";
 
-    private static final String SELECT = "select idAluno, nomeAluno, sobrenome from alunos order by idAluno";
+    private static final String SELECT = "select idAluno, nomealuno, sobrenome from alunos order by idaluno";
 
     private static final String DELETE = "delete from alunos where idAluno = ?";
 
@@ -83,18 +83,17 @@ public class AlunosRep extends AlunosEntity{
     public List<AlunosEntity> listar() {
         List<AlunosEntity> alunos = new ArrayList<>();
         ResultSet res;
-
+        
         try {
             pstm = connection.prepareStatement(SELECT);
+            
             res = pstm.executeQuery();
 
             while (res.next()) {
                 AlunosEntity c = new  AlunosEntity();
-                
-                c.setIdAluno(res.getInt("idAlunos"));
-                c.setNomeAluno(res.getString("nomeAlunos"));
-                c.setSobrenome(res.getString("Sobrenome"));             
-                
+                c.setIdAluno(res.getInt("idAluno"));
+                c.setNomeAluno(res.getString("nomeAluno"));
+                c.setSobrenome(res.getString("Sobrenome"));                
                 alunos.add(c);
             }
 
@@ -103,4 +102,47 @@ public class AlunosRep extends AlunosEntity{
         }
         return alunos;
     }
+    
+    public ArrayList<AlunosEntity> listarPorNome(String nome) {
+        ArrayList<AlunosEntity> lista = new ArrayList<>();
+        ResultSet res;
+        try {
+             pstm = connection.prepareStatement("SELECT * FROM alunos where nomeAluno LIKE '%"+nome+"%'");
+             res = pstm.executeQuery();
+             while (res.next()) {
+                AlunosEntity c = new  AlunosEntity();
+                c.setIdAluno(res.getInt("idAluno"));
+                c.setNomeAluno(res.getString("nomeAluno"));
+                c.setSobrenome(res.getString("Sobrenome"));
+                
+                lista.add(c);
+            }
+             
+        } catch (Exception ex) {
+            System.out.println("Ocorreu um erro ao tentar buscar os estudantes do banco: " + ex.getMessage());
+        }
+        return lista;
+    }
+    
+    public ArrayList<AlunosEntity> listarPorID(int id) {
+        ArrayList<AlunosEntity> lista = new ArrayList<>();
+        ResultSet res;
+        try {
+             pstm = connection.prepareStatement("SELECT * FROM alunos where idAluno LIKE '%"+id+"%'");
+             res = pstm.executeQuery();
+             while (res.next()) {
+                AlunosEntity c = new  AlunosEntity();
+                c.setIdAluno(res.getInt("idAluno"));
+                c.setNomeAluno(res.getString("nomeAluno"));
+                c.setSobrenome(res.getString("Sobrenome"));
+                
+                lista.add(c);
+            }
+             
+        } catch (Exception ex) {
+            System.out.println("Ocorreu um erro ao tentar buscar os dados do banco: " + ex.getMessage());
+        }
+        return lista;
+    }
+    
 }

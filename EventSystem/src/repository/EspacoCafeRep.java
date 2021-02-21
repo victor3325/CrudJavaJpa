@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.EspacoCafeEntity;
+import model.EspacoCafeEntity;
 import util.ConexaoBD;
 
 /**
@@ -90,8 +91,8 @@ public class EspacoCafeRep extends EspacoCafeEntity{
             while (res.next()) {
                 EspacoCafeEntity e = new  EspacoCafeEntity();
                 
-                e.setIdEspaco(res.getInt("idAlunos"));
-                e.setNomeEspaco(res.getString("nomeAlunos"));             
+                e.setIdEspaco(res.getInt("idEspaco"));
+                e.setNomeEspaco(res.getString("nomeEspaco"));             
                 e.setLotacao(res.getInt("lotacao"));
                 espaco.add(e);
             }
@@ -100,5 +101,46 @@ public class EspacoCafeRep extends EspacoCafeEntity{
             System.out.println("Ocorreu um erro ao tentar buscar os espaçoCafe no banco: " + ex.getMessage());
         }
         return espaco;
+    }
+    
+    public ArrayList<EspacoCafeEntity> listarPorNome(String nome) {
+        ArrayList<EspacoCafeEntity> lista = new ArrayList<>();
+        ResultSet res;
+        try {
+             pstm = connection.prepareStatement("SELECT * FROM espaco where nomeEspaco LIKE '%"+nome+"%'");
+             res = pstm.executeQuery();
+             while (res.next()) {
+                EspacoCafeEntity c = new  EspacoCafeEntity();
+                c.setIdEspaco(res.getInt("idEspaco"));
+                c.setNomeEspaco(res.getString("nomeEspaco"));
+                c.setLotacao(res.getInt("lotacao"));
+                
+                lista.add(c);
+            }
+             
+        } catch (Exception ex) {
+            System.out.println("Ocorreu um erro ao tentar buscar os estudantes do banco: " + ex.getMessage());
+        }
+        return lista;
+    }
+    
+    public ArrayList<EspacoCafeEntity> listarPorID(int id) {
+        ArrayList<EspacoCafeEntity> lista = new ArrayList<>();
+        ResultSet res;
+        try {
+             pstm = connection.prepareStatement("SELECT * FROM espaco where idEspaco LIKE '%"+id+"%'");
+             res = pstm.executeQuery();
+             while (res.next()) {
+                EspacoCafeEntity c = new  EspacoCafeEntity();
+                c.setIdEspaco(res.getInt("idEspaco"));
+                c.setNomeEspaco(res.getString("nomeEspaco"));
+                c.setLotacao(res.getInt("lotacao"));
+                lista.add(c);
+            }
+             
+        } catch (Exception ex) {
+            System.out.println("Ocorreu um erro ao tentar buscar os dados do banco: " + ex.getMessage());
+        }
+        return lista;
     }
 }
