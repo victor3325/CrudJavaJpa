@@ -90,7 +90,7 @@ public class AlunoetapasalaPK implements Serializable {
 
     @Override
     public String toString() {
-        return "view.AlunoetapasalaPK[ idAluno=" + idAluno + ", idSala=" + idSala + ", idEtapa=" + idEtapa + " ]";
+        return "  idAluno: " + idAluno + " Sala: " + idSala + " Etapa: " + idEtapa ;
     }
     
 }

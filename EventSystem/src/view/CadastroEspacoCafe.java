@@ -5,6 +5,9 @@
  */
 package view;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.EspacoCafeEntity;
 import repository.EspacoCafeRep;
 
 /**
@@ -36,6 +39,8 @@ public class CadastroEspacoCafe extends javax.swing.JFrame {
         txt_lotacao = new javax.swing.JTextField();
         btn_salvar = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Espaço Café");
         setMaximumSize(new java.awt.Dimension(225, 148));
         setMinimumSize(new java.awt.Dimension(225, 148));
         setPreferredSize(new java.awt.Dimension(225, 148));
@@ -110,13 +115,29 @@ public class CadastroEspacoCafe extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(318, 247));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    private boolean Cadastrado(){
+        boolean cadastrado = false;
+        List<EspacoCafeEntity> checarNome = new EspacoCafeRep().listar();
+        for (int i = 0; i < checarNome.size(); i++) {
+            if (txt_nome.getText().equals(checarNome.get(i).getNomeEspaco()) && txt_lotacao.getText().equals(checarNome.get(i).getLotacao())){
+                    JOptionPane.showMessageDialog(this, "Aluno Já Cadastrado");
+                    cadastrado = true;
+            }        
+        }
+        return cadastrado;
+    }
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
-        EspacoCafeRep cEspaco = new EspacoCafeRep();
+        if(txt_nome.getText().equals("") || txt_lotacao.getText().equals("")){
+            JOptionPane.showMessageDialog(this," Preencha todos os campos! " );
+           
+       }else if(!Cadastrado()){
+            EspacoCafeRep cEspaco = new EspacoCafeRep();
+            cEspaco.setNomeEspaco(txt_nome.getText());
+            cEspaco.setLotacao(Integer.parseInt(txt_lotacao.getText()));
+            cEspaco.adicionar(cEspaco);
         
-        cEspaco.setNomeEspaco(txt_nome.getText());
-        cEspaco.setLotacao(Integer.parseInt(txt_lotacao.getText()));
-        cEspaco.adicionar(cEspaco);
+       }
+        
         
         txt_nome.setText("");
         txt_lotacao.setText("");

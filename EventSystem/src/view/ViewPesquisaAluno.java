@@ -7,7 +7,6 @@ package view;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-
 import javax.swing.table.DefaultTableModel;
 import model.AlunosEntity;
 import model.EspacoCafeEntity;
@@ -15,20 +14,12 @@ import model.EtapaEntity;
 import model.IdCompostoAlunoEtapaEspaco;
 import model.IdCompostoAlunoEtapaSala;
 import model.SalasEntity;
-
 import repository.AlunoEtapaEspacoRep;
 import repository.AlunoEtapaSalaRep;
-
 import repository.AlunosRep;
-
 import repository.EspacoCafeRep;
 import repository.EtapaRep;
 import repository.SalasRep;
-
-
-
-
-
 /**
  *
  * @author victo
@@ -68,7 +59,8 @@ public class ViewPesquisaAluno extends javax.swing.JFrame {
         radEtapa2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Alunos");
+        setTitle("Consulta Alunos");
+        setResizable(false);
 
         btnAluno.setText("Consultar Aluno");
         btnAluno.addActionListener(new java.awt.event.ActionListener() {
@@ -103,15 +95,15 @@ public class ViewPesquisaAluno extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(27, 27, 27)
                         .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
                         .addComponent(btnAluno)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(radEtapa2)
                             .addComponent(radEtapa1))
@@ -152,6 +144,7 @@ public class ViewPesquisaAluno extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     public class tabelaAluno{
             int idAluno;

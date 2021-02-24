@@ -5,6 +5,8 @@
  */
 package view;
 
+import java.util.List;
+import javax.swing.JOptionPane;
 import model.SalasEntity;
 import repository.SalasRep;
 
@@ -37,6 +39,8 @@ public class CadastroSalas extends javax.swing.JFrame {
         btn_salvar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastrar Salas");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(225, 148));
         setMinimumSize(new java.awt.Dimension(225, 148));
@@ -110,14 +114,30 @@ public class CadastroSalas extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(318, 247));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+     private boolean Cadastrado(){
+        boolean cadastrado = false;
+         List<SalasEntity> checarNome = new SalasRep().listar();
+        for (int i = 0; i < checarNome.size(); i++) {
+            if (txt_sala.getText().equals(checarNome.get(i).getNomeSala()) && txt_lotacao.getText().equals(checarNome.get(i).getLotacao())){
+                    JOptionPane.showMessageDialog(this, "Aluno Já Cadastrado");
+                    cadastrado = true;
+            }        
+        }
+        return cadastrado;
+    }
     private void btn_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salvarActionPerformed
-        SalasRep cSalas = new SalasRep();
+        if(txt_sala.getText().equals("") || txt_lotacao.getText().equals("")){
+            JOptionPane.showMessageDialog(this," Preencha todos os campos! " );
+           
+        }else if(!Cadastrado()){
+            SalasRep cSalas = new SalasRep();
+            cSalas.setNomeSala(txt_sala.getText());
+            cSalas.setLotacao(Integer.parseInt(txt_lotacao.getText()));
         
-        cSalas.setNomeSala(txt_sala.getText());
-        cSalas.setLotacao(Integer.parseInt(txt_lotacao.getText()));
+            cSalas.adicionar(cSalas);
+        }
         
-        cSalas.adicionar(cSalas);
+        
         
         txt_sala.setText("");
         txt_lotacao.setText("");

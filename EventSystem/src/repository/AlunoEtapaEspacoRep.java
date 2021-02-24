@@ -27,7 +27,7 @@ public class AlunoEtapaEspacoRep extends AlunoEtapaEspacoEntity {
 
     private static final String DELETE = "delete from alunoetapaespaco where idAluno = ?";
 
-    private static final String UPDATE = "update alunosetapaespaco set idEtapa = ?, idEspaco = ?  where idAluno = ?";
+    private static final String UPDATE = "update alunoetapaespaco set idEtapa = ?, idEspaco = ?  where idAluno = ?";
     
     private Connection connection = ConexaoBD.conectarBanco();
     private PreparedStatement pstm;
@@ -83,8 +83,8 @@ public class AlunoEtapaEspacoRep extends AlunoEtapaEspacoEntity {
 
     }
 
-    public List<AlunoEtapaEspacoEntity> listar() {
-        List<AlunoEtapaEspacoEntity> aee = new ArrayList<>();
+    public List<IdCompostoAlunoEtapaEspaco> listar() {
+        List<IdCompostoAlunoEtapaEspaco> aee = new ArrayList<>();
         ResultSet res;
 
         try {
@@ -92,14 +92,14 @@ public class AlunoEtapaEspacoRep extends AlunoEtapaEspacoEntity {
             res = pstm.executeQuery();
 
             while (res.next()) {
-                AlunoEtapaEspacoEntity c = new  AlunoEtapaEspacoEntity();
+                IdCompostoAlunoEtapaEspaco idEe = new IdCompostoAlunoEtapaEspaco();
                 
-                c.getId().setIdAluno(res.getInt("idAluno"));
-                c.getId().setIdEtapa(res.getInt("idEtapa"));
-                c.getId().setIdEspaco(res.getInt("idEspaco"));
+                idEe.setIdAluno(res.getInt("idAluno"));
+                idEe.setIdEtapa(res.getInt("idEtapa"));
+                idEe.setIdEspaco(res.getInt("idEspaco"));
                 
                 
-                aee.add(c);
+                aee.add(idEe);
             }
 
         } catch (SQLException ex) {

@@ -5,7 +5,9 @@
  */
 package view;
 
+import java.util.List;
 import javax.swing.JOptionPane;
+import model.EspacoCafeEntity;
 import repository.EspacoCafeRep;
 
 /**
@@ -194,15 +196,27 @@ public class ViewTabelaEspacoCafe extends javax.swing.JFrame {
         bindingGroup.bind();
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+   
+    private boolean Cadastrado(){
+        boolean cadastrado = false;
+        List<EspacoCafeEntity> checarNome = new EspacoCafeRep().listar();
+        for (int i = 0; i < checarNome.size(); i++) {
+            if (txtNome.getText().equals(checarNome.get(i).getNomeEspaco()) && txtLotacao.getText().equals(checarNome.get(i).getLotacao())){
+                    JOptionPane.showMessageDialog(this, "Aluno Já Cadastrado");
+                    cadastrado = true;
+            }        
+        }
+        return cadastrado;
+    }
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         EspacoCafeRep aEspaco = new EspacoCafeRep();
      
         if(txtId.getText().equals("") || txtNome.getText().equals("") || txtLotacao.getText().equals("")){
             JOptionPane.showMessageDialog(this," Preencha todos os campos! " );
         }
-        else{
+        else if(!Cadastrado()){
             aEspaco.setNomeEspaco(txtNome.getText());
             aEspaco.setLotacao(Integer.parseInt(txtLotacao.getText()));
             aEspaco.setIdEspaco(Integer.parseInt(txtId.getText()));

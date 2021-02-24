@@ -10,12 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import model.AlunoEtapaSalaEntity;
-
 import model.IdCompostoAlunoEtapaSala;
-
-
 import util.ConexaoBD;
 
 /**
@@ -29,7 +25,7 @@ public class AlunoEtapaSalaRep extends AlunoEtapaSalaEntity{
 
     private static final String DELETE = "delete from alunoetapasala where idAluno = ?";
 
-    private static final String UPDATE = "update alunosetapasala set idEtapa = ?, idSala = ?  where idAluno = ?";
+    private static final String UPDATE = "update alunoetapasala set idEtapa = ?, idSala = ?  where idAluno = ?";
     
     private Connection connection = ConexaoBD.conectarBanco();
     private PreparedStatement pstm;
@@ -85,7 +81,28 @@ public class AlunoEtapaSalaRep extends AlunoEtapaSalaEntity{
 
     }
 
-    
+    public ArrayList<IdCompostoAlunoEtapaSala> listar() {
+        ArrayList<IdCompostoAlunoEtapaSala> lista = new ArrayList<>();
+        ResultSet res;
+        try {
+             pstm = connection.prepareStatement(SELECT);
+             res = pstm.executeQuery();
+             while (res.next()) {
+                
+                IdCompostoAlunoEtapaSala idEs = new IdCompostoAlunoEtapaSala();
+                
+                idEs.setIdAluno(res.getInt("idAluno"));
+                idEs.setIdEtapa(res.getInt("idEtapa"));
+                idEs.setIdSala(res.getInt("idSala"));
+                
+                lista.add(idEs);
+            }
+             
+        } catch (Exception ex) {
+            System.out.println("Ocorreu um erro ao tentar buscar os dados do banco: " + ex.getMessage());
+        }
+        return lista;
+    }
     
      public ArrayList<IdCompostoAlunoEtapaSala> listarPorIdEtapaComposto(int idetapa,int idaluno) {
         ArrayList<IdCompostoAlunoEtapaSala> lista = new ArrayList<>();

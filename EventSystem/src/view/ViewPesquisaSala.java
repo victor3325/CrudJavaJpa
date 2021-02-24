@@ -5,36 +5,16 @@
  */
 package view;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-
 import javax.swing.table.DefaultTableModel;
 import model.AlunosEntity;
-import model.EspacoCafeEntity;
-import model.EtapaEntity;
-import model.IdCompostoAlunoEtapaEspaco;
 import model.IdCompostoAlunoEtapaSala;
-import model.SalasEntity;
-
-import repository.AlunoEtapaEspacoRep;
 import repository.AlunoEtapaSalaRep;
-
 import repository.AlunosRep;
-
-import repository.EspacoCafeRep;
 import repository.EtapaRep;
 import repository.SalasRep;
-import util.ConexaoBD;
-
-
-
-
-
 /**
  *
  * @author victo
@@ -74,7 +54,8 @@ public class ViewPesquisaSala extends javax.swing.JFrame {
         radEtapa2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Turmas");
+        setTitle("Consulta de Turmas");
+        setResizable(false);
 
         btnTurma.setText("Consultar Turma");
         btnTurma.addActionListener(new java.awt.event.ActionListener() {
@@ -178,6 +159,7 @@ public class ViewPesquisaSala extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
     public void PopularJTable(int idAluno, int idSala, int idEtapa) {

@@ -5,10 +5,16 @@
  */
 package view;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.List;
+import javax.swing.JOptionPane;
+import model.AlunosEntity;
 import model.EspacoCafeEntity;
 import model.SalasEntity;
 import repository.AlunosRep;
 import repository.SalasRep;
+import util.ConexaoBD;
 
 
 /**
@@ -41,6 +47,8 @@ public class CadastroAluno extends javax.swing.JFrame {
         txt_sobrenome = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro Alunos");
         setMaximumSize(new java.awt.Dimension(225, 148));
         setMinimumSize(new java.awt.Dimension(225, 148));
         setPreferredSize(new java.awt.Dimension(225, 148));
@@ -117,14 +125,31 @@ public class CadastroAluno extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(318, 247));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    private boolean Cadastrado(){
+        boolean cadastrado = false;
+        List<AlunosEntity> checarNome = new AlunosRep().listar();
+        for (int i = 0; i < checarNome.size(); i++) {
+            if (txt_nome.getText().equals(checarNome.get(i).getNomeAluno()) && txt_sobrenome.getText().equals(checarNome.get(i).getSobrenome())){
+                    JOptionPane.showMessageDialog(this, "Aluno Já Cadastrado");
+                    cadastrado = true;
+            }        
+        }
+        return cadastrado;
+    }
+    
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-                   
-        AlunosRep cAlunos = new AlunosRep();
-        cAlunos.setNomeAluno(txt_nome.getText());
-        cAlunos.setSobrenome(txt_sobrenome.getText());
-        cAlunos.adicionar(cAlunos);
         
+        AlunosRep cAlunos = new AlunosRep();
+        
+        
+        if(txt_nome.getText().equals("") || txt_sobrenome.getText().equals("")){
+            JOptionPane.showMessageDialog(this," Preencha todos os campos! " );
+        }else if(!Cadastrado()){ 
+                cAlunos.setNomeAluno(txt_nome.getText());
+                cAlunos.setSobrenome(txt_sobrenome.getText());
+                cAlunos.adicionar(cAlunos);    
+        }  
+
         txt_nome.setText("");
         txt_sobrenome.setText("");
     }//GEN-LAST:event_btnSalvarActionPerformed

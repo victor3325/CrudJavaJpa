@@ -48,11 +48,12 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
-    <Property name="title" type="java.lang.String" value="Espaco"/>
+    <Property name="title" type="java.lang.String" value="Consulta Espa&#xe7;o"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
-    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
@@ -102,9 +103,9 @@
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="txtIdSala" min="-2" pref="48" max="-2" attributes="0"/>
+                          <Component id="txtIdEspaco" min="-2" pref="48" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="btnTurma" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEspaco" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="radEtapa2" min="-2" max="-2" attributes="0"/>
@@ -122,9 +123,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtIdSala" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtIdEspaco" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnTurma" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEspaco" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="radEtapa1" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -138,19 +139,19 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnTurma">
+        <Component class="javax.swing.JButton" name="btnEspaco">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Consultar Turma"/>
+            <Property name="text" type="java.lang.String" value="Consultar Espaco"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTurmaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEspacoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtIdSala">
+        <Component class="javax.swing.JTextField" name="txtIdEspaco">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="idSala"/>
+            <Property name="text" type="java.lang.String" value="idEspaco"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -160,7 +161,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="tblTurma">
+            <Component class="javax.swing.JTable" name="tblEspaco">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="3" rowCount="0">

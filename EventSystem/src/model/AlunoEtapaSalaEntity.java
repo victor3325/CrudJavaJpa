@@ -71,6 +71,11 @@ public class AlunoEtapaSalaEntity implements Serializable {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Alunos" + "id=" + id + '}';
+    }
+
     
    
     

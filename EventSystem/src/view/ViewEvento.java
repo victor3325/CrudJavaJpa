@@ -5,7 +5,9 @@
  */
 package view;
 
-import model.AlunoEtapaSalaEntity;
+import java.util.List;
+import java.util.Random;
+import javax.swing.JOptionPane;
 import model.IdCompostoAlunoEtapaEspaco;
 import model.IdCompostoAlunoEtapaSala;
 import repository.AlunoEtapaEspacoRep;
@@ -69,12 +71,10 @@ public class ViewEvento extends javax.swing.JFrame {
         txtAluno = new javax.swing.JTextField();
         txtIntervalo = new javax.swing.JTextField();
         txtEtapa = new javax.swing.JTextField();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tblEtapas = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        btnGerarEtapa2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Evento");
@@ -178,27 +178,9 @@ public class ViewEvento extends javax.swing.JFrame {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblIntervalos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idespaco}"), txtIntervalo, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
+        txtEtapa.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        txtEtapa.setText("1");
         txtEtapa.setEnabled(false);
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblEtapas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idetapa}"), txtEtapa, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
-        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, etapaList1, tblEtapas);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idetapa}"));
-        columnBinding.setColumnName("Id");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descricao}"));
-        columnBinding.setColumnName("Descricao");
-        columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-        jScrollPane4.setViewportView(tblEtapas);
-        if (tblEtapas.getColumnModel().getColumnCount() > 0) {
-            tblEtapas.getColumnModel().getColumn(0).setResizable(false);
-            tblEtapas.getColumnModel().getColumn(1).setResizable(false);
-        }
 
         jLabel6.setText("Alunos");
 
@@ -206,16 +188,21 @@ public class ViewEvento extends javax.swing.JFrame {
 
         jLabel8.setText("Intervalos");
 
-        jLabel9.setText("Etapas");
+        btnGerarEtapa2.setText("Gerar Etapa2");
+        btnGerarEtapa2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGerarEtapa2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
@@ -227,10 +214,16 @@ public class ViewEvento extends javax.swing.JFrame {
                             .addComponent(txtAluno)
                             .addComponent(txtIntervalo)
                             .addComponent(txtEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnGerarEtapa2)))
+                .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(64, 64, 64)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -239,40 +232,20 @@ public class ViewEvento extends javax.swing.JFrame {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(188, 188, 188)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel6)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(297, 297, 297))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(7, 7, 7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txtSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -284,13 +257,30 @@ public class ViewEvento extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(txtIntervalo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(13, 13, 13)
+                                .addComponent(jLabel5))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5)
-                            .addComponent(txtEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(60, 60, 60)
-                        .addComponent(btnSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(btnSalvar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnGerarEtapa2))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -316,27 +306,87 @@ public class ViewEvento extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    private boolean CadastradoEtapa(){
+        boolean cadastrado = false;
+        List<IdCompostoAlunoEtapaEspaco> checarRegistro = new AlunoEtapaEspacoRep().listar();
+        for (int i = 0; i < checarRegistro.size(); i++) {
+            if (txtAluno.getText().equals(checarRegistro.get(i).getIdAluno()) && txtEtapa.getText().equals(checarRegistro.get(i).getIdEtapa())){
+                    JOptionPane.showMessageDialog(this, "Aluno já Registrado nesta Etapa");
+                    cadastrado = true;
+            }        
+        }
+        return cadastrado;
+    }
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-       AlunoEtapaEspacoRep aee = new AlunoEtapaEspacoRep();
-       IdCompostoAlunoEtapaEspaco idE = new IdCompostoAlunoEtapaEspaco();
-        
-       idE.setIdAluno(Integer.parseInt(txtAluno.getText()));
-       idE.setIdEspaco(Integer.parseInt(txtIntervalo.getText()));
-       idE.setIdEtapa(Integer.parseInt(txtEtapa.getText()));
-       
-       AlunoEtapaSalaRep aes = new AlunoEtapaSalaRep();
-       IdCompostoAlunoEtapaSala idS = new IdCompostoAlunoEtapaSala();
-       
-       idS.setIdAluno(Integer.parseInt(txtAluno.getText()));
-       idS.setIdSala(Integer.parseInt(txtSala.getText()));
-       idS.setIdEtapa(Integer.parseInt(txtEtapa.getText()));
- 
-       aee.setId(idE);
-       aes.setId(idS);
-       aee.adicionar(aee);
-       aes.adicionar(aes);
+       if(txtAluno.getText().equals("") || txtEtapa.getText().equals("") || txtIntervalo.getText().equals("") || txtSala.getText().equals("")){
+            JOptionPane.showMessageDialog(this," Preencha todos os campos! " );
+           
+       }else if(!CadastradoEtapa()){
+           AlunoEtapaEspacoRep aee = new AlunoEtapaEspacoRep();
+           IdCompostoAlunoEtapaEspaco idE = new IdCompostoAlunoEtapaEspaco();
+
+           idE.setIdAluno(Integer.parseInt(txtAluno.getText()));
+           idE.setIdEspaco(Integer.parseInt(txtIntervalo.getText()));
+           idE.setIdEtapa(Integer.parseInt(txtEtapa.getText()));
+
+           AlunoEtapaSalaRep aes = new AlunoEtapaSalaRep();
+           IdCompostoAlunoEtapaSala idS = new IdCompostoAlunoEtapaSala();
+
+           idS.setIdAluno(Integer.parseInt(txtAluno.getText()));
+           idS.setIdSala(Integer.parseInt(txtSala.getText()));
+           idS.setIdEtapa(Integer.parseInt(txtEtapa.getText()));
+
+           aee.setId(idE);
+           aes.setId(idS);
+           aee.adicionar(aee);
+           aes.adicionar(aes);
+       }
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private int RandomID(){
+        Random idAleatorio = new Random();
+        int id = 0;
+        for (int i = 0; i < 1; i++) {
+            id = 1+idAleatorio.nextInt(2);
+            System.out.println(id);
+        }
+        return id;
+    }
+    private void btnGerarEtapa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarEtapa2ActionPerformed
+        AlunoEtapaSalaRep aes = new AlunoEtapaSalaRep();
+        IdCompostoAlunoEtapaSala idS = new IdCompostoAlunoEtapaSala();
+        AlunoEtapaEspacoRep aee = new AlunoEtapaEspacoRep();
+        IdCompostoAlunoEtapaEspaco idE = new IdCompostoAlunoEtapaEspaco();
+        List<IdCompostoAlunoEtapaEspaco> listaIdE = new AlunoEtapaEspacoRep().listar();
+        List<IdCompostoAlunoEtapaSala> listaIds = new AlunoEtapaSalaRep().listar();
+
+        for (int i = 0; i < listaIds.size(); i++) {
+            idS.setIdSala(RandomID());
+            idS.setIdAluno(listaIds.get(i).getIdAluno());
+            
+            
+            idS.setIdEtapa(2);
+            
+            aes.setId(idS);
+            if(!CadastradoEtapa()){
+                aes.adicionar(aes);
+            }
+        }
+        for (int i = 0; i < listaIdE.size(); i++) {
+            
+            idE.setIdAluno(listaIds.get(i).getIdAluno());
+            idE.setIdEspaco(RandomID());
+            
+            idE.setIdEtapa(2);
+            
+            aee.setId(idE);
+            if(!CadastradoEtapa()){
+                aee.adicionar(aee);
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Todos os alunos foram Distribuidos entre as salas na etapa 2");
+           
+    }//GEN-LAST:event_btnGerarEtapa2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -379,6 +429,7 @@ public class ViewEvento extends javax.swing.JFrame {
     private java.util.List<repository.Alunos> alunosList1;
     private javax.persistence.Query alunosQuery;
     private javax.persistence.Query alunosQuery1;
+    private javax.swing.JButton btnGerarEtapa2;
     private javax.swing.JButton btnSalvar;
     private java.util.List<repository.Espaco> espacoList;
     private java.util.List<repository.Espaco> espacoList1;
@@ -395,24 +446,15 @@ public class ViewEvento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane8;
     private java.util.List<repository.Salas> salasList;
     private java.util.List<repository.Salas> salasList1;
     private javax.persistence.Query salasQuery;
     private javax.persistence.Query salasQuery1;
     private javax.swing.JTable tblAlunos;
-    private javax.swing.JTable tblEtapa2;
-    private javax.swing.JTable tblEtapa4;
-    private javax.swing.JTable tblEtapas;
     private javax.swing.JTable tblIntervalos;
     private javax.swing.JTable tblSalas;
     private javax.swing.JTextField txtAluno;

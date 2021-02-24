@@ -8,23 +8,14 @@ package view;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-
 import javax.swing.table.DefaultTableModel;
 import model.AlunosEntity;
 import model.IdCompostoAlunoEtapaEspaco;
-
-import model.IdCompostoAlunoEtapaSala;
 import repository.AlunoEtapaEspacoRep;
-
-
-
-import repository.AlunoEtapaSalaRep;
-
 import repository.AlunosRep;
 import repository.EspacoCafeRep;
-
 import repository.EtapaRep;
-import repository.SalasRep;
+
 
 
 
@@ -61,27 +52,28 @@ public class ViewPesquisaEspaco extends javax.swing.JFrame {
         alunoetapaespacoList = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : alunoetapaespacoQuery.getResultList();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel2 = new javax.swing.JPanel();
-        btnTurma = new javax.swing.JButton();
-        txtIdSala = new javax.swing.JTextField();
+        btnEspaco = new javax.swing.JButton();
+        txtIdEspaco = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblTurma = new javax.swing.JTable();
+        tblEspaco = new javax.swing.JTable();
         radEtapa1 = new javax.swing.JRadioButton();
         radEtapa2 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Espaco");
+        setTitle("Consulta Espaço");
+        setResizable(false);
 
-        btnTurma.setText("Consultar Turma");
-        btnTurma.addActionListener(new java.awt.event.ActionListener() {
+        btnEspaco.setText("Consultar Espaco");
+        btnEspaco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTurmaActionPerformed(evt);
+                btnEspacoActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("idSala");
+        jLabel1.setText("idEspaco");
 
-        tblTurma.setModel(new javax.swing.table.DefaultTableModel(
+        tblEspaco.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -104,11 +96,11 @@ public class ViewPesquisaEspaco extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblTurma);
-        if (tblTurma.getColumnModel().getColumnCount() > 0) {
-            tblTurma.getColumnModel().getColumn(0).setResizable(false);
-            tblTurma.getColumnModel().getColumn(1).setResizable(false);
-            tblTurma.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(tblEspaco);
+        if (tblEspaco.getColumnModel().getColumnCount() > 0) {
+            tblEspaco.getColumnModel().getColumn(0).setResizable(false);
+            tblEspaco.getColumnModel().getColumn(1).setResizable(false);
+            tblEspaco.getColumnModel().getColumn(2).setResizable(false);
         }
 
         buttonGroup1.add(radEtapa1);
@@ -130,9 +122,9 @@ public class ViewPesquisaEspaco extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(27, 27, 27)
-                        .addComponent(txtIdSala, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIdEspaco, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(29, 29, 29)
-                        .addComponent(btnTurma)
+                        .addComponent(btnEspaco)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(radEtapa2)
@@ -145,9 +137,9 @@ public class ViewPesquisaEspaco extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtIdSala, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIdEspaco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
-                        .addComponent(btnTurma))
+                        .addComponent(btnEspaco))
                     .addComponent(radEtapa1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(radEtapa2)
@@ -174,12 +166,13 @@ public class ViewPesquisaEspaco extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
     public void PopularJTable(int idAluno, int idEspaco, int idEtapa) {
         
         
-        DefaultTableModel model =(DefaultTableModel) tblTurma.getModel();
+        DefaultTableModel model =(DefaultTableModel) tblEspaco.getModel();
                     
                 
                 List<AlunosEntity> alunos = new AlunosRep().listarPorEspaco(idAluno, idEspaco, idEtapa);
@@ -197,9 +190,9 @@ public class ViewPesquisaEspaco extends javax.swing.JFrame {
     }
     
     
-    private void btnTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTurmaActionPerformed
+    private void btnEspacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEspacoActionPerformed
         
-        DefaultTableModel model =(DefaultTableModel) tblTurma.getModel();
+        DefaultTableModel model =(DefaultTableModel) tblEspaco.getModel();
         model.setRowCount(0);
         AlunosRep alunos = new AlunosRep();
         EspacoCafeRep espaco = new EspacoCafeRep();
@@ -207,7 +200,7 @@ public class ViewPesquisaEspaco extends javax.swing.JFrame {
         alunos.setIdAluno(0);
         espaco.setIdEspaco(0);
         etapa.setIdEtapa(0);
-        int idEspaco = Integer.parseInt(txtIdSala.getText());  
+        int idEspaco = Integer.parseInt(txtIdEspaco.getText());  
         int idEtapa = 0;
         if(radEtapa1.isSelected()){
             idEtapa = 1;
@@ -217,18 +210,17 @@ public class ViewPesquisaEspaco extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this,"Selecione uma das etapas");
         }
         
-        ArrayList<IdCompostoAlunoEtapaEspaco> listaidSala = new AlunoEtapaEspacoRep().listarPorIdEspacoComposto(idEspaco, idEtapa);
+        ArrayList<IdCompostoAlunoEtapaEspaco> listaidEspaco = new AlunoEtapaEspacoRep().listarPorIdEspacoComposto(idEspaco, idEtapa);
         
-        for (int i = 0; i < listaidSala.size(); i++) {
-            alunos.setIdAluno(listaidSala.get(i).getIdAluno());
-            listaidSala.get(i).getIdEspaco();
-            listaidSala.get(i).getIdEtapa();
-            PopularJTable(listaidSala.get(i).getIdAluno(), idEspaco, idEtapa);
+        for (int i = 0; i < listaidEspaco.size(); i++) {
+            alunos.setIdAluno(listaidEspaco.get(i).getIdAluno());
+            listaidEspaco.get(i).getIdEspaco();
+            listaidEspaco.get(i).getIdEtapa();
+            PopularJTable(listaidEspaco.get(i).getIdAluno(), idEspaco, idEtapa);
         }
-        
-        
-        System.out.println(listaidSala);
-    }//GEN-LAST:event_btnTurmaActionPerformed
+
+        System.out.println(listaidEspaco);
+    }//GEN-LAST:event_btnEspacoActionPerformed
    
     /**
      * @param args the command line arguments
@@ -286,14 +278,14 @@ public class ViewPesquisaEspaco extends javax.swing.JFrame {
     private javax.persistence.Query alunoetapaespacoQuery;
     private java.util.List<repository.Alunoetapasala> alunoetapasalaList;
     private javax.persistence.Query alunoetapasalaQuery;
-    private javax.swing.JButton btnTurma;
+    private javax.swing.JButton btnEspaco;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton radEtapa1;
     private javax.swing.JRadioButton radEtapa2;
-    private javax.swing.JTable tblTurma;
-    private javax.swing.JTextField txtIdSala;
+    private javax.swing.JTable tblEspaco;
+    private javax.swing.JTextField txtIdEspaco;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,7 +5,9 @@
  */
 package view;
 
+import java.util.List;
 import javax.swing.JOptionPane;
+import model.SalasEntity;
 import repository.SalasRep;
 
 /**
@@ -82,10 +84,10 @@ public class ViewTabelaSalas extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(66, 66, 66))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,11 +176,11 @@ public class ViewTabelaSalas extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(12, 12, 12)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84))
+                .addGap(64, 64, 64))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,14 +194,25 @@ public class ViewTabelaSalas extends javax.swing.JFrame {
         bindingGroup.bind();
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
+    private boolean Cadastrado(){
+        boolean cadastrado = false;
+         List<SalasEntity> checarNome = new SalasRep().listar();
+        for (int i = 0; i < checarNome.size(); i++) {
+            if (txtNome.getText().equals(checarNome.get(i).getNomeSala()) && txtLotacao.getText().equals(checarNome.get(i).getLotacao())){
+                    JOptionPane.showMessageDialog(this, "Aluno Já Cadastrado");
+                    cadastrado = true;
+            }        
+        }
+        return cadastrado;
+    }
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
         SalasRep aSalas = new SalasRep();
 
         if (txtId.getText().equals("") || txtNome.getText().equals("") || txtLotacao.getText().equals("")) {
             JOptionPane.showMessageDialog(this," Preencha todos os campos! " );
-        }else{
+        }else if(!Cadastrado()){
             aSalas.setNomeSala(txtNome.getText());
             aSalas.setLotacao(Integer.parseInt(txtLotacao.getText()));
             aSalas.setIdSala(Integer.parseInt(txtId.getText()));
