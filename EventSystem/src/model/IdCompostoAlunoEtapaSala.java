@@ -49,6 +49,11 @@ public class IdCompostoAlunoEtapaSala implements Serializable{
     public void setIdSala(int idSala) {
         this.idSala = idSala;
     }
+
+    @Override
+    public String toString() {
+        return "IdCompostoAlunoEtapaSala{" + "idAluno=" + idAluno + ", idEtapa=" + idEtapa + ", idSala=" + idSala + '}';
+    }
     
     
 }

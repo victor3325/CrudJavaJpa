@@ -10,9 +10,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import model.AlunoEtapaSalaEntity;
+
+import model.IdCompostoAlunoEtapaSala;
+
 
 import util.ConexaoBD;
 
@@ -83,43 +85,23 @@ public class AlunoEtapaSalaRep extends AlunoEtapaSalaEntity{
 
     }
 
-    public List<AlunoEtapaSalaEntity> listar() {
-        List<AlunoEtapaSalaEntity> aes = new ArrayList<>();
-        ResultSet res;
-
-        try {
-            pstm = connection.prepareStatement(SELECT);
-            res = pstm.executeQuery();
-
-            while (res.next()) {
-                AlunoEtapaSalaEntity c = new  AlunoEtapaSalaEntity();
-                
-                c.getId().setIdAluno(res.getInt("idAluno"));
-                c.getId().setIdEtapa(res.getInt("idEtapa"));
-                c.getId().setIdSala(res.getInt("idSala"));
-                
-                
-                aes.add(c);
-            }
-
-        } catch (SQLException ex) {
-            System.out.println("Ocorreu um erro ao tentar buscar os estudantes do banco: " + ex.getMessage());
-        }
-        return aes;
-    }
     
-    public ArrayList<AlunoEtapaSalaEntity> listarPorIdEtapa(int id) {
-        ArrayList<AlunoEtapaSalaEntity> lista = new ArrayList<>();
+    
+     public ArrayList<IdCompostoAlunoEtapaSala> listarPorIdEtapaComposto(int idetapa,int idaluno) {
+        ArrayList<IdCompostoAlunoEtapaSala> lista = new ArrayList<>();
         ResultSet res;
         try {
-             pstm = connection.prepareStatement("SELECT * FROM alunoetapasala where idEtapa LIKE '%"+id+"%'");
+             pstm = connection.prepareStatement("SELECT * FROM alunoetapasala where idEtapa LIKE '%"+idetapa+"%' and idAluno LIKE '%"+idaluno+"%'");
              res = pstm.executeQuery();
              while (res.next()) {
-                AlunoEtapaSalaEntity c = new  AlunoEtapaSalaEntity();
-                c.getId().setIdAluno(res.getInt("idAluno"));
-                c.getId().setIdEtapa(res.getInt("idEtapa"));
-                c.getId().setIdSala(res.getInt("idSala"));
-                lista.add(c);
+                
+                IdCompostoAlunoEtapaSala idEs = new IdCompostoAlunoEtapaSala();
+                
+                idEs.setIdAluno(res.getInt("idAluno"));
+                idEs.setIdEtapa(res.getInt("idEtapa"));
+                idEs.setIdSala(res.getInt("idSala"));
+                
+                lista.add(idEs);
             }
              
         } catch (Exception ex) {
@@ -128,18 +110,21 @@ public class AlunoEtapaSalaRep extends AlunoEtapaSalaEntity{
         return lista;
     }
     
-    public ArrayList<AlunoEtapaSalaEntity> listarPorIdAluno(int id) {
-        ArrayList<AlunoEtapaSalaEntity> lista = new ArrayList<>();
+     public ArrayList<IdCompostoAlunoEtapaSala> listarPorIdAlunoComposto(int id) {
+        ArrayList<IdCompostoAlunoEtapaSala> lista = new ArrayList<>();
         ResultSet res;
         try {
              pstm = connection.prepareStatement("SELECT * FROM alunoetapasala where idAluno LIKE '%"+id+"%'");
              res = pstm.executeQuery();
              while (res.next()) {
-                AlunoEtapaSalaEntity c = new  AlunoEtapaSalaEntity();
-                c.getId().setIdAluno(res.getInt("idAluno"));
-                c.getId().setIdEtapa(res.getInt("idEtapa"));
-                c.getId().setIdSala(res.getInt("idSala"));
-                lista.add(c);
+                
+                IdCompostoAlunoEtapaSala idEs = new IdCompostoAlunoEtapaSala();
+                
+                idEs.setIdAluno(res.getInt("idAluno"));
+                idEs.setIdEtapa(res.getInt("idEtapa"));
+                idEs.setIdSala(res.getInt("idSala"));
+                
+                lista.add(idEs);
             }
              
         } catch (Exception ex) {
@@ -148,18 +133,23 @@ public class AlunoEtapaSalaRep extends AlunoEtapaSalaEntity{
         return lista;
     }
     
-    public ArrayList<AlunoEtapaSalaEntity> listarPorIdSala(int id) {
-        ArrayList<AlunoEtapaSalaEntity> lista = new ArrayList<>();
+    
+    
+    public ArrayList<IdCompostoAlunoEtapaSala> listarPorIdSalaComposto(int idSala,int idEtapa) {
+        ArrayList<IdCompostoAlunoEtapaSala> lista = new ArrayList<>();
         ResultSet res;
         try {
-             pstm = connection.prepareStatement("SELECT * FROM alunoetapasala where idSala LIKE '%"+id+"%'");
+             pstm = connection.prepareStatement("SELECT * FROM alunoetapasala where idSala LIKE '%"+idSala+"%' and idEtapa LIKE '%"+idEtapa+"%'");
              res = pstm.executeQuery();
              while (res.next()) {
-                AlunoEtapaSalaEntity c = new  AlunoEtapaSalaEntity();
-                c.getId().setIdAluno(res.getInt("idAluno"));
-                c.getId().setIdEtapa(res.getInt("idEtapa"));
-                c.getId().setIdSala(res.getInt("idSala"));
-                lista.add(c);
+                
+                IdCompostoAlunoEtapaSala idEs = new IdCompostoAlunoEtapaSala();
+                
+                idEs.setIdAluno(res.getInt("idAluno"));
+                idEs.setIdEtapa(res.getInt("idEtapa"));
+                idEs.setIdSala(res.getInt("idSala"));
+                
+                lista.add(idEs);
             }
              
         } catch (Exception ex) {
@@ -167,4 +157,5 @@ public class AlunoEtapaSalaRep extends AlunoEtapaSalaEntity{
         }
         return lista;
     }
+  
 }

@@ -5,9 +5,9 @@
  */
 package view;
 
-import java.awt.AWTError;
-import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import repository.AlunosRep;
 
 /**
@@ -51,6 +51,7 @@ public class ViewTabelaAlunos extends javax.swing.JFrame {
         txtId = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Alunos");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listar Alunos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
@@ -195,6 +196,8 @@ public class ViewTabelaAlunos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        
+        
         AlunosRep aAlunos = new AlunosRep();
         
         if(txtNome.getText().equals("") || txtId.getText().equals("") || txtSobrenome.getText().equals("") ){
@@ -212,12 +215,14 @@ public class ViewTabelaAlunos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
+        
         AlunosRep dAlunos = new AlunosRep();
         
         dAlunos.setIdAluno(Integer.parseInt(txtId.getText()));
         dAlunos.excluir(dAlunos);
         
         JOptionPane.showMessageDialog(this," Deletado! " );
+        
     }//GEN-LAST:event_btnDeletarActionPerformed
 
     /**

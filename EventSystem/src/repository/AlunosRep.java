@@ -144,5 +144,50 @@ public class AlunosRep extends AlunosEntity{
         }
         return lista;
     }
+    public List<AlunosEntity> listarPorSala(int idAluno, int idSala, int idEtapa) {
+        List<AlunosEntity> alunos = new ArrayList<>();
+        ResultSet res;
+        
+        try {
+            pstm = connection.prepareStatement("SELECT alunos.idAluno, alunos.nomeAluno, alunos.sobrenome FROM alunoEtapaSala JOIN alunos ON alunoetapasala.idAluno = alunos.idAluno JOIN etapa  on alunoetapasala.idEtapa = etapa.idEtapa JOIN salas  ON alunoetapasala.idSala = salas.idSala where alunos.idAluno LIKE '%"+idAluno+"%' and alunoetapasala.idSala LIKE '%"+idSala+"%' and alunoetapasala.idEtapa LIKE '%"+idEtapa+"%'"); 
+            
+            res = pstm.executeQuery();
+
+            while (res.next()) {
+                AlunosEntity c = new  AlunosEntity();
+                c.setIdAluno(res.getInt("idAluno"));
+                c.setNomeAluno(res.getString("nomeAluno"));
+                c.setSobrenome(res.getString("Sobrenome"));                
+                alunos.add(c);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Ocorreu um erro ao tentar buscar os estudantes do banco: " + ex.getMessage());
+        }
+        return alunos;
+    }
+    
+    public List<AlunosEntity> listarPorEspaco(int idAluno, int idEspaco, int idEtapa) {
+        List<AlunosEntity> alunos = new ArrayList<>();
+        ResultSet res;
+        
+        try {
+            pstm = connection.prepareStatement("SELECT alunos.idAluno, alunos.nomeAluno, alunos.sobrenome FROM alunoEtapaEspaco JOIN alunos ON alunoetapaespaco.idAluno = alunos.idAluno JOIN etapa on alunoetapaespaco.idEtapa = etapa.idEtapa JOIN espaco ON alunoetapaespaco.idEspaco = espaco.idEspaco where alunos.idAluno LIKE '%"+idAluno+"%' and alunoetapaespaco.idEspaco LIKE '%"+idEspaco+"%' and alunoetapaespaco.idEtapa LIKE '%"+idEtapa+"%'"); 
+            
+            res = pstm.executeQuery();
+
+            while (res.next()) {
+                AlunosEntity c = new  AlunosEntity();
+                c.setIdAluno(res.getInt("idAluno"));
+                c.setNomeAluno(res.getString("nomeAluno"));
+                c.setSobrenome(res.getString("Sobrenome"));                
+                alunos.add(c);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Ocorreu um erro ao tentar buscar os estudantes do banco: " + ex.getMessage());
+        }
+        return alunos;
+    }
     
 }

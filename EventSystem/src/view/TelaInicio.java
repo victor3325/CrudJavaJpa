@@ -46,8 +46,10 @@ public class TelaInicio extends javax.swing.JFrame {
         btn_consultaSalas = new javax.swing.JButton();
         btn_consultaEspaco = new javax.swing.JButton();
         jLabel_tituloPainel = new javax.swing.JLabel();
+        btnPesquisarAlunos = new javax.swing.JButton();
         btnOrganizar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnPesquisarTurmas = new javax.swing.JButton();
+        btnPesquisarEspaco = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -57,7 +59,7 @@ public class TelaInicio extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jList1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("FundoTela1");
+        setTitle("Inicio");
         setMaximumSize(new java.awt.Dimension(413, 285));
         setMinimumSize(new java.awt.Dimension(413, 285));
         setResizable(false);
@@ -141,6 +143,13 @@ public class TelaInicio extends javax.swing.JFrame {
         jLabel_tituloPainel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel_tituloPainel.setName(""); // NOI18N
 
+        btnPesquisarAlunos.setText("Consultar Alunos");
+        btnPesquisarAlunos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarAlunosActionPerformed(evt);
+            }
+        });
+
         btnOrganizar.setText("Organizar evento");
         btnOrganizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -148,10 +157,17 @@ public class TelaInicio extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Pesquisar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPesquisarTurmas.setText("Consultar Turmas");
+        btnPesquisarTurmas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPesquisarTurmasActionPerformed(evt);
+            }
+        });
+
+        btnPesquisarEspaco.setText("Consultar Espaco");
+        btnPesquisarEspaco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarEspacoActionPerformed(evt);
             }
         });
 
@@ -165,7 +181,12 @@ public class TelaInicio extends javax.swing.JFrame {
                     .addComponent(btn_consultaEspaco, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
                     .addComponent(btn_consultaSalas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_consultaAlunos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(159, 159, 159)
+                .addGap(45, 45, 45)
+                .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnPesquisarTurmas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPesquisarAlunos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPesquisarEspaco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
                 .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnNovoEspaco, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel_edicaoLayout.createSequentialGroup()
@@ -176,12 +197,10 @@ public class TelaInicio extends javax.swing.JFrame {
             .addGroup(jPanel_edicaoLayout.createSequentialGroup()
                 .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_edicaoLayout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(btnOrganizar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1))
+                        .addGap(183, 183, 183)
+                        .addComponent(btnOrganizar, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel_edicaoLayout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addGap(133, 133, 133)
                         .addComponent(jLabel_tituloPainel, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -190,10 +209,11 @@ public class TelaInicio extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_edicaoLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel_tituloPainel, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_consultaAlunos, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnNovoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnNovoAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPesquisarAlunos))
                 .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_edicaoLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
@@ -202,15 +222,17 @@ public class TelaInicio extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_consultaSalas, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnNovaSala, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnNovaSala, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPesquisarTurmas))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnNovoEspaco, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_consultaEspaco, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnOrganizar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)))
+                        .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel_edicaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnNovoEspaco, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_consultaEspaco, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnPesquisarEspaco))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnOrganizar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5))
         );
 
         javax.swing.GroupLayout jpanel_telaPrincipalLayout = new javax.swing.GroupLayout(jpanel_telaPrincipal);
@@ -218,14 +240,14 @@ public class TelaInicio extends javax.swing.JFrame {
         jpanel_telaPrincipalLayout.setHorizontalGroup(
             jpanel_telaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpanel_telaPrincipalLayout.createSequentialGroup()
-                .addComponent(jPanel_edicao, javax.swing.GroupLayout.PREFERRED_SIZE, 436, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel_edicao, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         jpanel_telaPrincipalLayout.setVerticalGroup(
             jpanel_telaPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanel_telaPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel_edicao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel_edicao, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -265,17 +287,25 @@ public class TelaInicio extends javax.swing.JFrame {
         tEspaco.setVisible(true);
     }//GEN-LAST:event_btn_consultaEspacoActionPerformed
 
-    
-    
     private void btnOrganizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrganizarActionPerformed
         ViewEvento vEvento = new ViewEvento();
         vEvento.setVisible(true);
     }//GEN-LAST:event_btnOrganizarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        ViewPesquisa pesquisa = new ViewPesquisa();
-        pesquisa.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnPesquisarAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarAlunosActionPerformed
+        ViewPesquisaAluno pesquisaAluno = new ViewPesquisaAluno();
+        pesquisaAluno.setVisible(true);
+    }//GEN-LAST:event_btnPesquisarAlunosActionPerformed
+
+    private void btnPesquisarTurmasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarTurmasActionPerformed
+        ViewPesquisaSala pesquisaTurma = new ViewPesquisaSala();
+        pesquisaTurma.setVisible(true);
+    }//GEN-LAST:event_btnPesquisarTurmasActionPerformed
+
+    private void btnPesquisarEspacoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarEspacoActionPerformed
+        ViewPesquisaEspaco pesquisaEspaco = new ViewPesquisaEspaco();
+        pesquisaEspaco.setVisible(true);
+    }//GEN-LAST:event_btnPesquisarEspacoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -319,10 +349,12 @@ public class TelaInicio extends javax.swing.JFrame {
     private javax.swing.JButton btnNovoAluno;
     private javax.swing.JButton btnNovoEspaco;
     private javax.swing.JButton btnOrganizar;
+    private javax.swing.JButton btnPesquisarAlunos;
+    private javax.swing.JButton btnPesquisarEspaco;
+    private javax.swing.JButton btnPesquisarTurmas;
     private javax.swing.JButton btn_consultaAlunos;
     private javax.swing.JButton btn_consultaEspaco;
     private javax.swing.JButton btn_consultaSalas;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel_tituloPainel;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel_consultar;

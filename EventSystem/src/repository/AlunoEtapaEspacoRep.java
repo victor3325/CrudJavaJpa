@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.AlunoEtapaEspacoEntity;
-import model.AlunoEtapaSalaEntity;
+import model.IdCompostoAlunoEtapaEspaco;
 
 import util.ConexaoBD;
 
@@ -108,18 +108,21 @@ public class AlunoEtapaEspacoRep extends AlunoEtapaEspacoEntity {
         return aee;
     }
     
-    public ArrayList<AlunoEtapaEspacoEntity> listarPorIdAluno(int id) {
-        ArrayList<AlunoEtapaEspacoEntity> lista = new ArrayList<>();
+    public ArrayList<IdCompostoAlunoEtapaEspaco> listarPorIdEspacoComposto(int idEspaco, int idEtapa) {
+        ArrayList<IdCompostoAlunoEtapaEspaco> lista = new ArrayList<>();
         ResultSet res;
         try {
-             pstm = connection.prepareStatement("SELECT * FROM alunoetapaespaco where idAluno LIKE '%"+id+"%'");
+             pstm = connection.prepareStatement("SELECT * FROM alunoetapaespaco where idEspaco LIKE '%"+idEspaco+"%' and idEtapa LIKE '%"+idEtapa+"%'");
              res = pstm.executeQuery();
              while (res.next()) {
-                AlunoEtapaEspacoEntity c = new  AlunoEtapaEspacoEntity();
-                c.getId().setIdAluno(res.getInt("idAluno"));
-                c.getId().setIdEtapa(res.getInt("idEtapa"));
-                c.getId().setIdEspaco(res.getInt("idEspaco"));
-                lista.add(c);
+                
+                IdCompostoAlunoEtapaEspaco idEe = new IdCompostoAlunoEtapaEspaco();
+                
+                idEe.setIdAluno(res.getInt("idAluno"));
+                idEe.setIdEtapa(res.getInt("idEtapa"));
+                idEe.setIdEspaco(res.getInt("idEspaco"));
+                
+                lista.add(idEe);
             }
              
         } catch (Exception ex) {
@@ -128,42 +131,48 @@ public class AlunoEtapaEspacoRep extends AlunoEtapaEspacoEntity {
         return lista;
     }
     
-    public ArrayList<AlunoEtapaEspacoEntity> listarPorIdEtapa(int id) {
-        ArrayList<AlunoEtapaEspacoEntity> lista = new ArrayList<>();
+    public ArrayList<IdCompostoAlunoEtapaEspaco> listarPorIdAlunoComposto(int id) {
+        ArrayList<IdCompostoAlunoEtapaEspaco> lista = new ArrayList<>();
         ResultSet res;
         try {
-             pstm = connection.prepareStatement("SELECT * FROM alunoetapaespaco where idEtapa LIKE '%"+id+"%'");
+             pstm = connection.prepareStatement("SELECT * FROM alunoetapaespaco where idAluno LIKE '%"+id+"%'");
              res = pstm.executeQuery();
              while (res.next()) {
-                AlunoEtapaEspacoEntity c = new  AlunoEtapaEspacoEntity();
-                c.getId().setIdAluno(res.getInt("idAluno"));
-                c.getId().setIdEtapa(res.getInt("idEtapa"));
-                c.getId().setIdEspaco(res.getInt("idEspaco"));
-                lista.add(c);
+                
+                IdCompostoAlunoEtapaEspaco idEe = new IdCompostoAlunoEtapaEspaco();
+                
+                idEe.setIdAluno(res.getInt("idAluno"));
+                idEe.setIdEtapa(res.getInt("idEtapa"));
+                idEe.setIdEspaco(res.getInt("idEspaco"));
+                
+                lista.add(idEe);
             }
              
         } catch (Exception ex) {
-            System.out.println("Ocorreu um erro ao tentar buscar dados do banco: " + ex.getMessage());
+            System.out.println("Ocorreu um erro ao tentar buscar os dados do banco: " + ex.getMessage());
         }
         return lista;
     }
     
-    public ArrayList<AlunoEtapaEspacoEntity> listarPorIdEspaco(int id) {
-        ArrayList<AlunoEtapaEspacoEntity> lista = new ArrayList<>();
+    public ArrayList<IdCompostoAlunoEtapaEspaco> listarPorIdEtapaComposto(int idEtapa, int idAluno) {
+        ArrayList<IdCompostoAlunoEtapaEspaco> lista = new ArrayList<>();
         ResultSet res;
         try {
-             pstm = connection.prepareStatement("SELECT * FROM alunoetapaespaco where idEspaco LIKE '%"+id+"%'");
+             pstm = connection.prepareStatement("SELECT * FROM alunoetapaespaco where idEtapa LIKE '%"+idEtapa+"%' and idAluno LIKE '%"+idAluno+"%'");
              res = pstm.executeQuery();
              while (res.next()) {
-                AlunoEtapaEspacoEntity c = new  AlunoEtapaEspacoEntity();
-                c.getId().setIdAluno(res.getInt("idAluno"));
-                c.getId().setIdEtapa(res.getInt("idEtapa"));
-                c.getId().setIdEspaco(res.getInt("idEspaco"));
-                lista.add(c);
+                
+                IdCompostoAlunoEtapaEspaco idEe = new IdCompostoAlunoEtapaEspaco();
+                
+                idEe.setIdAluno(res.getInt("idAluno"));
+                idEe.setIdEtapa(res.getInt("idEtapa"));
+                idEe.setIdEspaco(res.getInt("idEspaco"));
+                
+                lista.add(idEe);
             }
              
         } catch (Exception ex) {
-            System.out.println("Ocorreu um erro ao tentar buscar dados do banco: " + ex.getMessage());
+            System.out.println("Ocorreu um erro ao tentar buscar os dados do banco: " + ex.getMessage());
         }
         return lista;
     }

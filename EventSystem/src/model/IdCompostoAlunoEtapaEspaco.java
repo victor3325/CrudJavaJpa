@@ -48,6 +48,11 @@ public class IdCompostoAlunoEtapaEspaco implements Serializable{
         this.idEspaco = idEspaco;
     }
 
+    @Override
+    public String toString() {
+        return "IdCompostoAlunoEtapaEspaco{" + "idAluno=" + idAluno + ", idEtapa=" + idEtapa + ", idEspaco=" + idEspaco + '}';
+    }
+
     
     
     
