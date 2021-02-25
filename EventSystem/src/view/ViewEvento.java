@@ -10,8 +10,10 @@ import java.util.Random;
 import javax.swing.JOptionPane;
 import model.IdCompostoAlunoEtapaEspaco;
 import model.IdCompostoAlunoEtapaSala;
+import model.SalasEntity;
 import repository.AlunoEtapaEspacoRep;
 import repository.AlunoEtapaSalaRep;
+import repository.SalasRep;
 
 
 
@@ -65,15 +67,12 @@ public class ViewEvento extends javax.swing.JFrame {
         tblAlunos = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblSalas = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tblIntervalos = new javax.swing.JTable();
         txtSala = new javax.swing.JTextField();
         txtAluno = new javax.swing.JTextField();
         txtIntervalo = new javax.swing.JTextField();
         txtEtapa = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
         btnGerarEtapa2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -82,7 +81,7 @@ public class ViewEvento extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Evento", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
-        btnSalvar.setText("Salvar");
+        btnSalvar.setText("Gerar Etapa1");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalvarActionPerformed(evt);
@@ -141,28 +140,6 @@ public class ViewEvento extends javax.swing.JFrame {
             tblSalas.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, espacoList1, tblIntervalos);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idespaco}"));
-        columnBinding.setColumnName("Id");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeespaco}"));
-        columnBinding.setColumnName("Espaco");
-        columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lotacao}"));
-        columnBinding.setColumnName("Lotacao");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-        jScrollPane3.setViewportView(tblIntervalos);
-        if (tblIntervalos.getColumnModel().getColumnCount() > 0) {
-            tblIntervalos.getColumnModel().getColumn(0).setResizable(false);
-            tblIntervalos.getColumnModel().getColumn(1).setResizable(false);
-            tblIntervalos.getColumnModel().getColumn(2).setResizable(false);
-        }
-
         txtSala.setEnabled(false);
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblSalas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idsala}"), txtSala, org.jdesktop.beansbinding.BeanProperty.create("text"));
@@ -175,7 +152,7 @@ public class ViewEvento extends javax.swing.JFrame {
 
         txtIntervalo.setEnabled(false);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblIntervalos, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idespaco}"), txtIntervalo, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JTable(), org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idespaco}"), txtIntervalo, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         txtEtapa.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
@@ -185,8 +162,6 @@ public class ViewEvento extends javax.swing.JFrame {
         jLabel6.setText("Alunos");
 
         jLabel7.setText("Salas");
-
-        jLabel8.setText("Intervalos");
 
         btnGerarEtapa2.setText("Gerar Etapa2");
         btnGerarEtapa2.addActionListener(new java.awt.event.ActionListener() {
@@ -200,9 +175,9 @@ public class ViewEvento extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3)
@@ -214,29 +189,15 @@ public class ViewEvento extends javax.swing.JFrame {
                             .addComponent(txtAluno)
                             .addComponent(txtIntervalo)
                             .addComponent(txtEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnGerarEtapa2)))
-                .addGap(15, 15, 15)
+                    .addComponent(btnGerarEtapa2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(79, 79, 79)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(64, 64, 64)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(297, 297, 297))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -244,7 +205,7 @@ public class ViewEvento extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(7, 7, 7)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -263,24 +224,17 @@ public class ViewEvento extends javax.swing.JFrame {
                                 .addComponent(jLabel5))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(txtEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnSalvar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGerarEtapa2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(btnSalvar)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnGerarEtapa2))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -290,15 +244,13 @@ public class ViewEvento extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         bindingGroup.bind();
@@ -318,10 +270,45 @@ public class ViewEvento extends javax.swing.JFrame {
         return cadastrado;
     }
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-       if(txtAluno.getText().equals("") || txtEtapa.getText().equals("") || txtIntervalo.getText().equals("") || txtSala.getText().equals("")){
-            JOptionPane.showMessageDialog(this," Preencha todos os campos! " );
+        
+        //Definir média de alunos nos espaços de café
+        List<IdCompostoAlunoEtapaEspaco> checarEspaco1 = new AlunoEtapaEspacoRep().listarPorIdEspacoComposto(1, 1);
+        int alunosEspaco1 = checarEspaco1.size();
+
+        List<IdCompostoAlunoEtapaEspaco> checarEspaco2 = new AlunoEtapaEspacoRep().listarPorIdEspacoComposto(2, 1);
+        int alunosEspaco2 = checarEspaco2.size();     
+
+        int soma = alunosEspaco1 + alunosEspaco2;
+
+        int resto = soma % 2;
+
+        if(resto == 0){
+            txtIntervalo.setText("2");
+        }else{
+            txtIntervalo.setText("1");
+        }
+        
+        //Definir Média de alunos nas Salas
+        List<IdCompostoAlunoEtapaSala> checarSala1 = new AlunoEtapaSalaRep().listarPorIdSalaComposto(1, 1);
+        int alunosSala1 = checarSala1.size();
+
+        List<IdCompostoAlunoEtapaSala> checarSala2 = new AlunoEtapaSalaRep().listarPorIdSalaComposto(2, 1);
+        int alunosSala2 = checarSala2.size();    
+
+        int soma2 = alunosSala1 + alunosSala2;
+
+        int resto2 = soma2 % 2;
+
+        if(resto2 == 0){
+            txtSala.setText("2");
+        }else{
+            txtSala.setText("1");
+        }
+        
+        if(txtAluno.getText().equals("") || txtEtapa.getText().equals("") || txtIntervalo.getText().equals("") || txtSala.getText().equals("")){
+            JOptionPane.showMessageDialog(this," Selecione o Aluno! " );
            
-       }else if(!CadastradoEtapa()){
+        }else if(!CadastradoEtapa()){
            AlunoEtapaEspacoRep aee = new AlunoEtapaEspacoRep();
            IdCompostoAlunoEtapaEspaco idE = new IdCompostoAlunoEtapaEspaco();
 
@@ -355,11 +342,14 @@ public class ViewEvento extends javax.swing.JFrame {
     private void btnGerarEtapa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarEtapa2ActionPerformed
         AlunoEtapaSalaRep aes = new AlunoEtapaSalaRep();
         IdCompostoAlunoEtapaSala idS = new IdCompostoAlunoEtapaSala();
+        
         AlunoEtapaEspacoRep aee = new AlunoEtapaEspacoRep();
         IdCompostoAlunoEtapaEspaco idE = new IdCompostoAlunoEtapaEspaco();
+        
         List<IdCompostoAlunoEtapaEspaco> listaIdE = new AlunoEtapaEspacoRep().listar();
         List<IdCompostoAlunoEtapaSala> listaIds = new AlunoEtapaSalaRep().listar();
-
+        
+        
         for (int i = 0; i < listaIds.size(); i++) {
             idS.setIdSala(RandomID());
             idS.setIdAluno(listaIds.get(i).getIdAluno());
@@ -372,6 +362,7 @@ public class ViewEvento extends javax.swing.JFrame {
                 aes.adicionar(aes);
             }
         }
+        
         for (int i = 0; i < listaIdE.size(); i++) {
             
             idE.setIdAluno(listaIds.get(i).getIdAluno());
@@ -384,7 +375,7 @@ public class ViewEvento extends javax.swing.JFrame {
                 aee.adicionar(aee);
             }
         }
-        JOptionPane.showMessageDialog(this, "Todos os alunos foram Distribuidos entre as salas na etapa 2");
+        JOptionPane.showMessageDialog(this, "Todos os alunos foram Distribuidos entre as salas e espaços de café na etapa 2");
            
     }//GEN-LAST:event_btnGerarEtapa2ActionPerformed
 
@@ -445,17 +436,14 @@ public class ViewEvento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private java.util.List<repository.Salas> salasList;
     private java.util.List<repository.Salas> salasList1;
     private javax.persistence.Query salasQuery;
     private javax.persistence.Query salasQuery1;
     private javax.swing.JTable tblAlunos;
-    private javax.swing.JTable tblIntervalos;
     private javax.swing.JTable tblSalas;
     private javax.swing.JTextField txtAluno;
     private javax.swing.JTextField txtEtapa;

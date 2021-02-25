@@ -1,1 +1,0 @@
-SELECT alunos.IDALUNO,alunos.NOMEALUNO,alunos.SOBRENOME,salas.NOMESALA,espaco.NOMEESPACO,etapa.DESCRICAO FROM alunos INNER JOIN,alunoetapasala,alunoetapaespaco,etapa,salas,espaco

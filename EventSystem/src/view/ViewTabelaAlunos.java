@@ -7,10 +7,17 @@ package view;
 
 
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import model.AlunoEtapaEspacoEntity;
 import model.AlunosEntity;
+import model.IdCompostoAlunoEtapaEspaco;
+import model.IdCompostoAlunoEtapaSala;
+import repository.AlunoEtapaEspacoRep;
+import repository.AlunoEtapaSalaRep;
 import repository.AlunosRep;
+import repository.EspacoCafeRep;
 
 /**
  *
@@ -229,6 +236,32 @@ public class ViewTabelaAlunos extends javax.swing.JFrame {
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         
+        AlunoEtapaEspacoRep espaco = new AlunoEtapaEspacoRep();
+        IdCompostoAlunoEtapaEspaco idespaco = new IdCompostoAlunoEtapaEspaco();
+        
+        List<IdCompostoAlunoEtapaEspaco> idEspaco = new AlunoEtapaEspacoRep().listar();
+        
+        for (int i = 0; i < idEspaco.size(); i++) {
+           if(Integer.parseInt(txtId.getText()) == idEspaco.get(i).getIdAluno()){
+                idespaco.setIdAluno(idEspaco.get(i).getIdAluno());
+                espaco.setId(idespaco);
+                espaco.excluir(espaco);
+           }
+        }
+        AlunoEtapaSalaRep sala = new AlunoEtapaSalaRep();
+        IdCompostoAlunoEtapaSala idsala = new IdCompostoAlunoEtapaSala();
+        
+        List<IdCompostoAlunoEtapaSala> idSala = new AlunoEtapaSalaRep().listar();
+        
+        
+        for (int i = 0; i < idSala.size(); i++) {
+           if(Integer.parseInt(txtId.getText()) == idSala.get(i).getIdAluno()){
+                idsala.setIdAluno(idSala.get(i).getIdAluno());
+                sala.setId(idsala);
+                sala.excluir(sala);
+           }
+        }
+
         AlunosRep dAlunos = new AlunosRep();
         
         dAlunos.setIdAluno(Integer.parseInt(txtId.getText()));
