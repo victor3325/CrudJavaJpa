@@ -82,6 +82,29 @@ public class AlunoEtapaEspacoRep extends AlunoEtapaEspacoEntity {
         }
 
     }
+    public void excluirEtapa1(AlunoEtapaEspacoEntity aee) {
+        try {
+            pstm = connection.prepareStatement("delete from alunoetapaespaco where idEtapa = 1");
+            pstm.executeUpdate();
+            
+            System.out.println("Concluido!");
+        } catch (SQLException ex) {
+            System.out.println("Ocorreu um erro ao tentar salvar: " + ex.getMessage());
+        }
+
+    }
+    
+    public void excluirEtapa2(AlunoEtapaEspacoEntity aee) {
+        try {
+            pstm = connection.prepareStatement("delete from alunoetapaespaco where idEtapa = 2");
+            pstm.executeUpdate();
+            
+            System.out.println("Concluido!");
+        } catch (SQLException ex) {
+            System.out.println("Ocorreu um erro ao tentar salvar: " + ex.getMessage());
+        }
+
+    }
 
     public List<IdCompostoAlunoEtapaEspaco> listar() {
         List<IdCompostoAlunoEtapaEspaco> aee = new ArrayList<>();

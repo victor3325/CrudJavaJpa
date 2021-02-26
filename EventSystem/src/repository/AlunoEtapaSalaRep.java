@@ -80,7 +80,30 @@ public class AlunoEtapaSalaRep extends AlunoEtapaSalaEntity{
         }
 
     }
+    public void excluirEtapa1(AlunoEtapaSalaEntity aes) {
+        try {
+            pstm = connection.prepareStatement("delete from alunoetapasala where idEtapa = 1");
+            
+            pstm.executeUpdate();
+            
+            System.out.println("Concluido!");
+        } catch (SQLException ex) {
+            System.out.println("Ocorreu um erro ao tentar salvar: " + ex.getMessage());
+        }
 
+    }
+    public void excluirEtapa2(AlunoEtapaSalaEntity aes) {
+        try {
+            pstm = connection.prepareStatement("delete from alunoetapasala where idEtapa = 2");
+            
+            pstm.executeUpdate();
+            
+            System.out.println("Concluido!");
+        } catch (SQLException ex) {
+            System.out.println("Ocorreu um erro ao tentar salvar: " + ex.getMessage());
+        }
+
+    }
     public ArrayList<IdCompostoAlunoEtapaSala> listar() {
         ArrayList<IdCompostoAlunoEtapaSala> lista = new ArrayList<>();
         ResultSet res;

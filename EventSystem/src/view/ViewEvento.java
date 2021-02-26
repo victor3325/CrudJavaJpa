@@ -65,15 +65,13 @@ public class ViewEvento extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAlunos = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblSalas = new javax.swing.JTable();
         txtSala = new javax.swing.JTextField();
         txtAluno = new javax.swing.JTextField();
         txtIntervalo = new javax.swing.JTextField();
         txtEtapa = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         btnGerarEtapa2 = new javax.swing.JButton();
+        btnLimparEt2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Evento");
@@ -118,31 +116,9 @@ public class ViewEvento extends javax.swing.JFrame {
             tblAlunos.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, salasList1, tblSalas);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${idsala}"));
-        columnBinding.setColumnName("Id");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomesala}"));
-        columnBinding.setColumnName("Sala");
-        columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lotacao}"));
-        columnBinding.setColumnName("Lotacao");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
-        bindingGroup.addBinding(jTableBinding);
-        jTableBinding.bind();
-        jScrollPane2.setViewportView(tblSalas);
-        if (tblSalas.getColumnModel().getColumnCount() > 0) {
-            tblSalas.getColumnModel().getColumn(0).setResizable(false);
-            tblSalas.getColumnModel().getColumn(1).setResizable(false);
-            tblSalas.getColumnModel().getColumn(2).setResizable(false);
-        }
-
         txtSala.setEnabled(false);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblSalas, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idsala}"), txtSala, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JTable(), org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idsala}"), txtSala, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         txtAluno.setEnabled(false);
@@ -152,21 +128,23 @@ public class ViewEvento extends javax.swing.JFrame {
 
         txtIntervalo.setEnabled(false);
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, new javax.swing.JTable(), org.jdesktop.beansbinding.ELProperty.create("${selectedElement.idespaco}"), txtIntervalo, org.jdesktop.beansbinding.BeanProperty.create("text"));
-        bindingGroup.addBinding(binding);
-
         txtEtapa.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
         txtEtapa.setText("1");
         txtEtapa.setEnabled(false);
 
         jLabel6.setText("Alunos");
 
-        jLabel7.setText("Salas");
-
         btnGerarEtapa2.setText("Gerar Etapa2");
         btnGerarEtapa2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGerarEtapa2ActionPerformed(evt);
+            }
+        });
+
+        btnLimparEt2.setText("Limpar Etapa2");
+        btnLimparEt2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparEt2ActionPerformed(evt);
             }
         });
 
@@ -189,14 +167,13 @@ public class ViewEvento extends javax.swing.JFrame {
                             .addComponent(txtAluno)
                             .addComponent(txtIntervalo)
                             .addComponent(txtEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGerarEtapa2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnSalvar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(79, 79, 79)
+                    .addComponent(btnLimparEt2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -205,7 +182,7 @@ public class ViewEvento extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel6)
                 .addGap(7, 7, 7)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
@@ -225,16 +202,13 @@ public class ViewEvento extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtEtapa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSalvar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(47, 47, 47)
+                        .addComponent(btnLimparEt2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGerarEtapa2))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -258,17 +232,19 @@ public class ViewEvento extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    private boolean CadastradoEtapa(){
+    private boolean CadastradoEtapa1(){
         boolean cadastrado = false;
         List<IdCompostoAlunoEtapaEspaco> checarRegistro = new AlunoEtapaEspacoRep().listar();
         for (int i = 0; i < checarRegistro.size(); i++) {
-            if (txtAluno.getText().equals(checarRegistro.get(i).getIdAluno()) && txtEtapa.getText().equals(checarRegistro.get(i).getIdEtapa())){
-                    JOptionPane.showMessageDialog(this, "Aluno já Registrado nesta Etapa");
+            if (txtAluno.getText().equals(checarRegistro.get(i).getIdAluno()) && txtEtapa.getText().equals("1")){
+                    
                     cadastrado = true;
             }        
         }
         return cadastrado;
     }
+    
+
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         
         //Definir média de alunos nos espaços de café
@@ -308,7 +284,7 @@ public class ViewEvento extends javax.swing.JFrame {
         if(txtAluno.getText().equals("") || txtEtapa.getText().equals("") || txtIntervalo.getText().equals("") || txtSala.getText().equals("")){
             JOptionPane.showMessageDialog(this," Selecione o Aluno! " );
            
-        }else if(!CadastradoEtapa()){
+        }else if(!CadastradoEtapa1()){
            AlunoEtapaEspacoRep aee = new AlunoEtapaEspacoRep();
            IdCompostoAlunoEtapaEspaco idE = new IdCompostoAlunoEtapaEspaco();
 
@@ -327,7 +303,9 @@ public class ViewEvento extends javax.swing.JFrame {
            aes.setId(idS);
            aee.adicionar(aee);
            aes.adicionar(aes);
-       }
+        }else{
+            JOptionPane.showMessageDialog(this, "Aluno já Registrado nesta Etapa");
+        }
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private int RandomID(){
@@ -339,6 +317,7 @@ public class ViewEvento extends javax.swing.JFrame {
         }
         return id;
     }
+    
     private void btnGerarEtapa2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGerarEtapa2ActionPerformed
         AlunoEtapaSalaRep aes = new AlunoEtapaSalaRep();
         IdCompostoAlunoEtapaSala idS = new IdCompostoAlunoEtapaSala();
@@ -346,38 +325,42 @@ public class ViewEvento extends javax.swing.JFrame {
         AlunoEtapaEspacoRep aee = new AlunoEtapaEspacoRep();
         IdCompostoAlunoEtapaEspaco idE = new IdCompostoAlunoEtapaEspaco();
         
-        List<IdCompostoAlunoEtapaEspaco> listaIdE = new AlunoEtapaEspacoRep().listar();
         List<IdCompostoAlunoEtapaSala> listaIds = new AlunoEtapaSalaRep().listar();
-        
+        boolean cadastrado = false;
         
         for (int i = 0; i < listaIds.size(); i++) {
-            idS.setIdSala(RandomID());
-            idS.setIdAluno(listaIds.get(i).getIdAluno());
-            
-            
-            idS.setIdEtapa(2);
-            
-            aes.setId(idS);
-            if(!CadastradoEtapa()){
+            if (listaIds.get(i).getIdEtapa() == 2){
+                cadastrado = true;
+            }else if(!cadastrado){
+                idE.setIdEtapa(2);
+                idS.setIdEtapa(2);
+                idS.setIdSala(RandomID());
+                idS.setIdAluno(listaIds.get(i).getIdAluno());
+                idE.setIdAluno(listaIds.get(i).getIdAluno());
+                idE.setIdEspaco(RandomID());
+
+                aee.setId(idE);
+                aes.setId(idS);
                 aes.adicionar(aes);
+                aee.adicionar(aee); 
             }
         }
         
-        for (int i = 0; i < listaIdE.size(); i++) {
-            
-            idE.setIdAluno(listaIds.get(i).getIdAluno());
-            idE.setIdEspaco(RandomID());
-            
-            idE.setIdEtapa(2);
-            
-            aee.setId(idE);
-            if(!CadastradoEtapa()){
-                aee.adicionar(aee);
-            }
+        if(!cadastrado){
+            JOptionPane.showMessageDialog(this, "Todos os alunos foram Distribuidos entre as salas e espaços de café na etapa 2");
+        }else{
+            JOptionPane.showMessageDialog(this, "Alunos já Registrado nesta Etapa");
         }
-        JOptionPane.showMessageDialog(this, "Todos os alunos foram Distribuidos entre as salas e espaços de café na etapa 2");
-           
     }//GEN-LAST:event_btnGerarEtapa2ActionPerformed
+
+    private void btnLimparEt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparEt2ActionPerformed
+        AlunoEtapaSalaRep aes = new AlunoEtapaSalaRep();
+        AlunoEtapaEspacoRep aee = new AlunoEtapaEspacoRep();
+        
+        aee.excluirEtapa2(aee);
+        aes.excluirEtapa2(aes);
+        JOptionPane.showMessageDialog(this, "Todos os alunos foram Retirados da etapa 2");
+    }//GEN-LAST:event_btnLimparEt2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -421,6 +404,7 @@ public class ViewEvento extends javax.swing.JFrame {
     private javax.persistence.Query alunosQuery;
     private javax.persistence.Query alunosQuery1;
     private javax.swing.JButton btnGerarEtapa2;
+    private javax.swing.JButton btnLimparEt2;
     private javax.swing.JButton btnSalvar;
     private java.util.List<repository.Espaco> espacoList;
     private java.util.List<repository.Espaco> espacoList1;
@@ -435,16 +419,13 @@ public class ViewEvento extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private java.util.List<repository.Salas> salasList;
     private java.util.List<repository.Salas> salasList1;
     private javax.persistence.Query salasQuery;
     private javax.persistence.Query salasQuery1;
     private javax.swing.JTable tblAlunos;
-    private javax.swing.JTable tblSalas;
     private javax.swing.JTextField txtAluno;
     private javax.swing.JTextField txtEtapa;
     private javax.swing.JTextField txtIntervalo;
